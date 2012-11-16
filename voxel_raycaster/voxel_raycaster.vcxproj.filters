@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\render">
+      <UniqueIdentifier>{a6d9a3fa-87eb-4fcb-9420-c646d2c54f15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\io">
+      <UniqueIdentifier>{c003b906-95fe-4c63-92bc-a3ef05573c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tree">
+      <UniqueIdentifier>{7f50d044-45ec-4018-8b64-d3aa720896a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABox.h">
@@ -24,28 +33,10 @@
     <ClInclude Include="array_3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="avox_tools.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseOctreeRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="binvox_tools.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DepthRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DiffuseOctreeRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Frustrum.h">
@@ -57,28 +48,10 @@
     <ClInclude Include="Light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mavox_tools.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="misc_math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="morton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Octree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="octree_generation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OctreeBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ray.h">
@@ -90,17 +63,53 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TreeTraverser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VoxelGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseOctreeRenderer.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugRenderer.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthRenderer.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="DiffuseOctreeRenderer.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalRenderer.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
     <ClInclude Include="WorkOctreeRenderer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="avox_tools.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="binvox_tools.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="mavox_tools.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="morton.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="Octree.h">
+      <Filter>Header Files\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="octree_generation.h">
+      <Filter>Header Files\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="OctreeBuilder.h">
+      <Filter>Header Files\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeTraverser.h">
+      <Filter>Header Files\tree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
