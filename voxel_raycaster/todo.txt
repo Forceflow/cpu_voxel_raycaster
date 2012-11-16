@@ -1,0 +1,36 @@
+Improve octree perf?
+####################
+
+- Structure as a whole
+--Keep all nodes in an array instead of allocating them with new()
+
+- Store even less in Node
+
+- Traversal itself
+-- more optimisations possible?
+-- stack is quite big
+--- do we need to keep intermediary t values?
+
+- Profile code tools?
+- More OpenMP fiddling
+
+------------------------------
+
+Improve sparsify
+################
+- OpenMP
+- Better building phase (more memory coherence)
+
+------------------------------
+
+Statistics
+- Number of nodes
+- Size of octree
+
+
+
+
+
+-- start testing normals
+- use smart pointers
+- GPU ray casting?
