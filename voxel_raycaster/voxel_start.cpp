@@ -295,7 +295,6 @@ void initRenderSystem(unsigned int render_x, unsigned int render_y){
 }
 
 int main(int argc, char **argv) {
-
 	printInfo();
 	printControls();
 
