@@ -10,14 +10,18 @@
 class Octree
 {
 public:
+	// Octree position/size
 	vec3 min;
 	vec3 max;
 	vec3 size;
 	size_t gridlength;
 
+	// The data
 	VoxelData const* data; // just here for reference: not really needed to know which data this tree covers
 	DataPoint* leafdata;
+	DataPoint* nonleafdata;
 
+	// The octree nodes
 	std::vector<Node> nodes;
 
 	Octree(VoxelData const* data, vec3 min, vec3 max, vec3 size, size_t gridlength);

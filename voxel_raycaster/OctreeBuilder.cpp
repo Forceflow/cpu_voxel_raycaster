@@ -2,12 +2,13 @@
 
 using namespace std;
 
-
 OctreeBuilder::OctreeBuilder(size_t gridlength, size_t nfilled) : currentdatapos(0), current_morton(0), finalized(false), nfilled(nfilled){
 	// Allocate data for voxel data and octree
 	cout << "  allocating " << (nfilled*sizeof(DataPoint))/1024.0f/1024.0f << " MB of memory for voxel data ... "; cout.flush();
 	DataPoint* leafdata = new DataPoint[nfilled];
 	cout << "Done." << endl;
+
+	// Create octree
 	octree = new Octree(vec3(0,0,0),vec3(1,1,1),vec3(1,1,1),gridlength);
 	octree->leafdata = leafdata;
 
@@ -78,4 +79,7 @@ void OctreeBuilder::addDataPoint(uint64_t morton_number, DataPoint point){
 
 	// INCREASE CURRENT MORTON NUMBER
 	current_morton++;
+}
+
+void OctreeBuilder::buildLevels(){
 }

@@ -14,6 +14,7 @@ class OctreeBuilder
 public:
 	OctreeBuilder(size_t gridlength, size_t nfilled);
 	void addDataPoint(uint64_t morton_number, DataPoint x);
+	void buildLevels();
 	void finalizeOctree();
 	Octree* getOctree();
 
