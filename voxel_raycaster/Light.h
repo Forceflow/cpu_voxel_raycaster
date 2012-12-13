@@ -16,6 +16,9 @@ public:
 	float LINEAR_ATTENUATION;
 	float QUADRATIC_ATTENUATION;
 
+	// other light constants
+	float SHININESS;
+
 	Light(vec3 position,vec3 diffuse, vec3 specular);
 	virtual ~Light();
 
@@ -37,6 +40,7 @@ inline void Light::initLight(){
 	this->CONSTANT_ATTENUATION = 1.0f;
 	this->LINEAR_ATTENUATION = 0.0f;
 	this->QUADRATIC_ATTENUATION = 0.0f;
+	this->SHININESS = 50.0f;
 }
 
 

@@ -269,7 +269,8 @@ void generateLightTWBars(TwBar* bar){
 		{ "Specular",    TW_TYPE_COLOR3F,   offsetof(Light, specular),"" },
 		{ "Constant Attenuation", TW_TYPE_FLOAT, offsetof(Light, CONSTANT_ATTENUATION), "" },
 		{ "Linear Attenuation", TW_TYPE_FLOAT, offsetof(Light, LINEAR_ATTENUATION), "" },
-		{ "Quadratic Attenuation", TW_TYPE_FLOAT, offsetof(Light, QUADRATIC_ATTENUATION), "" }
+		{ "Quadratic Attenuation", TW_TYPE_FLOAT, offsetof(Light, QUADRATIC_ATTENUATION), "" },
+		{ "Shininess", TW_TYPE_FLOAT, offsetof(Light, SHININESS), "" }
 	};
 	TwType lightType = TwDefineStruct("Light", lightMembers, 7, sizeof(Light), NULL, NULL);
 
