@@ -33,7 +33,6 @@ private:
 
 	// voxel data position
 	size_t currentdatapos;
-	size_t nfilled;
 	 
 	// helper functions
 	void refineNode(Node* n);
@@ -52,7 +51,12 @@ inline bool OctreeBuilder::isBufferEmpty(const vector<Node> &buffer){
 inline Node OctreeBuilder::groupNodes(Octree* _octree, const vector<Node> &buffer){
 	Node parent = Node();
 	for(int k = 0; k<8; k++){
-		parent.children[k] = _octree->storeNode(buffer[k]);
+		if(!buffer[k].isNull()){
+			parent.children[k] = _octree->storeNode(buffer[k]);
+		}
+		else{
+			parent.children[k] = NULL;
+		}
 	}
 	return parent;
 }

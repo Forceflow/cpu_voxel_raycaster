@@ -11,8 +11,6 @@
 #include "array_3d.h"
 #include "util.h"
 
-
-
 class DataPoint {
 public:
 	float opacity;
@@ -24,8 +22,6 @@ public:
 	DataPoint(float opacity, RGBColor color,vec3 normal);
 	bool isEmpty();
 };
-
-
 
 typedef al::array::array_3d<DataPoint> VoxelData;
 
