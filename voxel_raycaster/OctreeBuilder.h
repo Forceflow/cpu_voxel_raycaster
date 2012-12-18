@@ -34,10 +34,12 @@ private:
 	// voxel data position
 	size_t currentdatapos;
 	size_t nfilled;
-
+	 
 	// helper functions
+	void refineNode(Node* n);
 	bool isBufferEmpty(const vector<Node> &buffer);
 	Node groupNodes(Octree* _octree, const vector<Node> &buffer);
+
 };
 
 inline bool OctreeBuilder::isBufferEmpty(const vector<Node> &buffer){

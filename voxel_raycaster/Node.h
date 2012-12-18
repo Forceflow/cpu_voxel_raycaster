@@ -14,16 +14,23 @@ public:
 	DataPoint const* data;
 
 	Node();
-	bool isTerminal() const;
+	bool isLeaf() const;
 	bool hasData() const;
 	bool isNull() const;
 };
 
-inline bool Node::isNull() const{
-	return isTerminal() && !hasData();
+inline Node::Node(){
+	data = NULL;
+	for(int i = 0; i<8; i++){
+		children[i] = 0;
+	}
 }
 
-inline bool Node::isTerminal() const{
+inline bool Node::isNull() const{
+	return isLeaf() && !hasData();
+}
+
+inline bool Node::isLeaf() const{
 	for(int i = 0; i<8; i++){if(children[i] != 0){return false;}}
 	return true;
 }

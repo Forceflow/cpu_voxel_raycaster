@@ -11,6 +11,7 @@ OctreeBuilder::OctreeBuilder(size_t gridlength, size_t nfilled) : currentdatapos
 	// Create octree
 	octree = new Octree(vec3(0,0,0),vec3(1,1,1),vec3(1,1,1),gridlength);
 	octree->leafdata = leafdata;
+	octree->n_leafnodes = nfilled;
 
 	// Make sure we have enough buffers
 	maxdepth = gridlengthToDepth(gridlength);
@@ -82,4 +83,21 @@ void OctreeBuilder::addDataPoint(uint64_t morton_number, DataPoint point){
 }
 
 void OctreeBuilder::buildLevels(){
+	this->finalizeOctree(); // we can't build levels if octree is not complete
+	octree->n_nonleafnodes = octree->nodes.size() - octree->n_leafnodes;
+
+
+}
+
+void OctreeBuilder::refineNode(Node* n){
+	if(n->hasData()){  // this node already has data assigned: no need to refine
+		return;
+	}
+	for(int i = 0; i < 8; i++){ // this node has no data: need to refine
+		refineNode(octree->getNode(n->children[i]));
+	}
+	// create new datapoint
+	DataPoint d = DataPoint();
+
+
 }

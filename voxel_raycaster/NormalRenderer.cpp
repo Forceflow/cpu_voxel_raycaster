@@ -24,7 +24,7 @@ void NormalRenderer::Render(const RenderContext& rc, const Octree const* tree, u
 			index = partindex + x*4; // index in char array computation (part 2)
 			t = TreeTraverser(tree,rc.getRayForPixel(x,y));
 			while((!t.isTerminated())){
-				if(t.getCurrentNode()->isTerminal()){
+				if(t.getCurrentNode()->isLeaf()){
 					if(t.getCurrentNode()->hasData()){
 						
 						vec3 normal = t.getCurrentNode()->data->normal;

@@ -24,7 +24,7 @@ void DiffuseOctreeRenderer::Render(const RenderContext& rc, const Octree const* 
 			index = partindex + x*4; // index in char array computation (part 2)
 			t = TreeTraverser(tree,rc.getRayForPixel(x,y));
 			while((!t.isTerminated())){
-				if(t.getCurrentNode()->isTerminal() && t.getCurrentNode()->hasData()){
+				if(t.getCurrentNode()->isLeaf() && t.getCurrentNode()->hasData()){
 					r=0.0f;
 					g=0.0f;
 					b=0.0f;

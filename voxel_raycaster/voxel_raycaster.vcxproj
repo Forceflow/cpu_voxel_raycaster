@@ -53,14 +53,12 @@
     <ClCompile Include="avox_tools.cpp" />
     <ClCompile Include="BaseOctreeRenderer.cpp" />
     <ClCompile Include="binvox_tools.cpp" />
-    <ClCompile Include="DataPoint.cpp" />
     <ClCompile Include="DebugRenderer.cpp" />
     <ClCompile Include="DepthRenderer.cpp" />
     <ClCompile Include="DiffuseOctreeRenderer.cpp" />
     <ClCompile Include="intersection.cpp" />
     <ClCompile Include="mavox_tools.cpp" />
     <ClCompile Include="morton.cpp" />
-    <ClCompile Include="Node.cpp" />
     <ClCompile Include="NormalRenderer.cpp" />
     <ClCompile Include="OctreeBuilder.cpp" />
     <ClCompile Include="octree_generation.cpp" />

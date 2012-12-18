@@ -38,7 +38,7 @@ void TreeTraverser::step(){
 	//POP
 	// if we're in a terminal node or if we visited all children of that node (next child = 8), 
 	// or if the t1 values have become negative, pop the current node from the stack
-	if(stack.back().nextchild == 8 || stack.back().node->isTerminal()){
+	if(stack.back().nextchild == 8 || stack.back().node->isLeaf()){
 		stack.pop_back();
 		return;
 	}
