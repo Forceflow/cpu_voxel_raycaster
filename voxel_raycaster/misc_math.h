@@ -15,6 +15,10 @@ inline int log2(float x){
 	return log;
 }
 
+inline int isPowerOf2(unsigned int x){
+  return ((x != 0) && !(x & (x - 1)));
+}
+
 template <typename T> int sgn(T val) {
 	return (val > T(0)) - (val < T(0));
 }

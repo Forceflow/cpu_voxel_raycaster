@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include "DataPoint.h"
+#include "misc_math.h"
 #include <time.h>
 #include <omp.h>
 

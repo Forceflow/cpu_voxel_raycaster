@@ -27,6 +27,9 @@ int parseMavoxHeader(ifstream& input, int& version, size_t& gridlength, size_t& 
 	if((depth != height) || (depth != width) || (width != height)){
 		cout << "  not a cubic grid" << endl; return 0;
 	}
+	if(!isPowerOf2(depth)){
+		cout << "  grid length is not a power of 2" << endl; return 0;
+	}
 	gridlength = depth;
 	return 1;
 }
@@ -41,7 +44,7 @@ int readMavoxFile(std::string const filename, Octree*& tree){
 	// Parse Mavox header
 	int version;
 	size_t gridlength,nfilled;
-	parseMavoxHeader(input,version,gridlength,nfilled);
+	if(parseMavoxHeader(input,version,gridlength,nfilled) == 0){ return 0; };
 	cout << "  mavox version: " << version << endl;
 	cout << "  grid size: "<< gridlength << "x" << gridlength << "x" << gridlength << " voxels" << endl;
 	double percentfilled = ((double) nfilled / (double) (gridlength*gridlength*gridlength))*100.0f;

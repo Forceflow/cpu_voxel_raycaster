@@ -25,6 +25,9 @@ int parseAvoxHeader(ifstream& input, int& version, size_t& gridlength){
 	if((depth != height) || (depth != width) || (width != height)){
 		cout << "  not a cubic grid" << endl; return 0;
 	}
+	if(!isPowerOf2(depth)){
+		cout << "  grid length is not a power of 2" << endl; return 0;
+	}
 
 	gridlength = depth;
 	return 1;
