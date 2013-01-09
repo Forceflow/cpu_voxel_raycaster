@@ -10,6 +10,11 @@
 #include "float.h"
 #include <math.h>
 
+inline int log2(float x){
+	int log = log10((float) x)/log10(2.0f);
+	return log;
+}
+
 template <typename T> int sgn(T val) {
 	return (val > T(0)) - (val < T(0));
 }
@@ -30,8 +35,7 @@ inline int clamp(int d,int min, int max) {
 	return d;
 }
 
-inline bool IsNumber(double x) 
-{
+inline bool IsNumber(double x) {
 	// This looks like it should always be true, 
 	// but it's false if x is a NaN.
 	return (x == x); 

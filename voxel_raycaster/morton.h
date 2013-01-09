@@ -11,8 +11,6 @@
 #include <limits.h>
 #include <vector>
 
-size_t gridlengthToDepth(size_t gridlength);
-
 uint64_t mortonEncode(uint64_t x, uint64_t y, uint64_t z);
 std::vector<uint64_t> mortonDecode(uint64_t const morton);
 

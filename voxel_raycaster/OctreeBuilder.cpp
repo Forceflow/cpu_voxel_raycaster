@@ -14,7 +14,7 @@ OctreeBuilder::OctreeBuilder(size_t gridlength, size_t nfilled) : currentdatapos
 	octree->n_leafnodes = nfilled;
 
 	// Make sure we have enough buffers
-	maxdepth = gridlengthToDepth(gridlength);
+	maxdepth = log2(gridlength);
 	buffers.resize(maxdepth+1);
 
 	// calculate max morton code
@@ -94,10 +94,11 @@ void OctreeBuilder::refineNode(Node* n){
 		return;
 	}
 	for(int i = 0; i < 8; i++){ // this node has no data: need to refine
-		refineNode(octree->getNode(n->children[i]));
+		if(n->children[i] != NULL){
+			refineNode(octree->getNode(n->children[i]));
+		}
 	}
 	// create new datapoint
 	DataPoint d = DataPoint();
-
-
+	
 }

@@ -2,19 +2,6 @@
 
 using namespace std;
 
-// Convert a given grid length (=length of one side of a cubic grid) to a number which indicates how deep the octree goes.
-size_t gridlengthToDepth(size_t const gridlength){
-	uint64_t length = gridlength;
-	if(length == 0) return 0;
-	int shiftcount = 0;
-	while(shiftcount < sizeof(length)*CHAR_BIT){
-		unsigned int shifted = length >> shiftcount;
-		if(shifted == (unsigned int) 1) return shiftcount;
-		shiftcount++;
-	}
-	return 0;
-}
-
 uint64_t mortonEncode(uint64_t x, uint64_t y, uint64_t z){
 	uint64_t answer = 0;
 	for (uint64_t i = 0; i < (sizeof(uint64_t) * CHAR_BIT); ++i) {

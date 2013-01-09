@@ -27,7 +27,7 @@ void generateOctree(size_t gridlength,VoxelData const *data,bool const *morton_a
 	*_result = new Octree(data,vec3(0,0,0),vec3(1,1,1),vec3(1,1,1),gridlength);
 
 	// create buffers for every level in the octree
-	int depth = gridlengthToDepth(gridlength);
+	int depth = log2(gridlength);
 	vector<vector<Node>> buffers;
 	buffers.resize(depth+1);
 

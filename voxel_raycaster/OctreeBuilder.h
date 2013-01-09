@@ -6,6 +6,7 @@
 #include <vector>
 #include "morton.h"
 #include "Octree.h"
+#include "misc_math.h"
 
 using namespace std;
 
