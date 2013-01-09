@@ -10,9 +10,13 @@
 #include "float.h"
 #include <math.h>
 
-inline int log2(float x){
-	int log = log10((float) x)/log10(2.0f);
-	return log;
+inline unsigned int log2(unsigned int val) {
+	unsigned int ret = -1;
+	while (val != 0) {
+		val >>= 1;
+		ret++;
+	}
+	return ret;
 }
 
 inline int isPowerOf2(unsigned int x){
