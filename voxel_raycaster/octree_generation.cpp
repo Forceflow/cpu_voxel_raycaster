@@ -39,7 +39,7 @@ void generateOctree(size_t gridlength,VoxelData const *data,bool const *morton_a
 		if(morton_array[i]) {
 			nodecount++;
 			vector<uint64_t> s = mortonDecode(i);
-			n.data = &(*data)(s[2],s[1],s[0]); // because morton encoding is z,y,x
+			//n.data = &(*data)(s[2],s[1],s[0]); // because morton encoding is z,y,x
 		} 
 		buffers[depth].push_back(n);
 

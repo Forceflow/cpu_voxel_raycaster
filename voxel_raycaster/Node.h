@@ -11,7 +11,7 @@ class Node
 {
 public:
 	size_t children[8];
-	DataPoint const* data;
+	size_t data;
 
 	Node();
 	bool isLeaf() const;
@@ -20,7 +20,7 @@ public:
 };
 
 inline Node::Node(){
-	data = NULL;
+	data = 0;
 	for(int i = 0; i<8; i++){
 		children[i] = 0;
 	}
@@ -36,7 +36,7 @@ inline bool Node::isLeaf() const{
 }
 
 inline bool Node::hasData() const{
-	return !(data == NULL);
+	return !(data == 0);
 }
 
 #endif /* NODE_H_ */

@@ -42,22 +42,22 @@ void DiffuseOctreeRenderer::Render(const RenderContext& rc, const Octree const* 
 							to_light = normalize(to_light);
 
 							// Diffuse
-							diffuse_factor = t.getCurrentNode()->data->normal DOT to_light;
+							diffuse_factor = tree->leafdata[t.getCurrentNode()->data].normal DOT to_light;
 							r +=  std::max(0.0f,diffuse_factor) * distancecut * rc.lights[i].diffuse[0];
 							g +=  std::max(0.0f,diffuse_factor) * distancecut * rc.lights[i].diffuse[1];
 							b +=  std::max(0.0f,diffuse_factor) * distancecut * rc.lights[i].diffuse[2];
 
 							// Phong
-							float phong_factor = pow(s DOT t.getCurrentNode()->data->normal, rc.lights[i].SHININESS);
+							float phong_factor = pow(s DOT tree->leafdata[t.getCurrentNode()->data].normal, rc.lights[i].SHININESS);
 							r +=  std::max(0.0f,phong_factor) * distancecut * rc.lights[i].specular[0];
 							g +=  std::max(0.0f,phong_factor) * distancecut * rc.lights[i].specular[1];
 							b +=  std::max(0.0f,phong_factor) * distancecut * rc.lights[i].specular[2];
 
 						}
 					}
-					texture_array[index] = (unsigned char) clampf(255*(t.getCurrentNode()->data->color[0]/250.0f + r),0,255);
-					texture_array[index+1] = (unsigned char) clampf (255*(t.getCurrentNode()->data->color[1]/250.0f + g),0,255);
-					texture_array[index+2] = (unsigned char) clampf (255*(t.getCurrentNode()->data->color[2]/250.0f + b),0,255);
+					texture_array[index] = (unsigned char) clampf(255*(tree->leafdata[t.getCurrentNode()->data].color[0]/250.0f + r),0,255);
+					texture_array[index+1] = (unsigned char) clampf (255*(tree->leafdata[t.getCurrentNode()->data].color[1]/250.0f + g),0,255);
+					texture_array[index+2] = (unsigned char) clampf (255*(tree->leafdata[t.getCurrentNode()->data].color[2]/250.0f + b),0,255);
 					texture_array[index+3] = (unsigned char) 1;
 					break;
 				}
