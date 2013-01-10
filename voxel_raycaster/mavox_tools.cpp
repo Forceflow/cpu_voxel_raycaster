@@ -62,16 +62,17 @@ int readMavoxFile(std::string const filename, Octree*& tree){
 		input >> morton_number >> nx >> ny >> nz;
 		vector<uint64_t> dec = mortonDecode(morton_number);
 		size_t rx = dec[2]; size_t ry = dec[1]; size_t rz = dec[0];
-		assert(rx < gridlength);
-		assert(ry < gridlength);
-		assert(rz < gridlength);
-		float r = (float(rx)/gridlength)*25;
-		float g = (float(ry)/gridlength)*25;
-		float b = (float(rz)/gridlength)*25;
-		assert(r >= 0.0f);
-		assert(g >= 0.0f);
-		assert(b >= 0.0f);
-		DataPoint point = DataPoint(1,RGBColor(r,g,b),vec3(nx,ny,nz));
+
+		assert(rx > 0.0f && ry > 0.0f && rz > 0.0f);
+		assert(rx < gridlength && ry < gridlength && rz < gridlength);
+
+		float r = ((float) rx) / ((float) gridlength);
+		float g = ((float) ry) / ((float) gridlength);
+		float b = ((float) rz) / ((float) gridlength);
+
+		assert(r >= 0.0f && g >= 0.0f && b >= 0.0f);
+		assert(r <= 1.0f && g <= 1.0f && b <= 1.0f);
+		DataPoint point = DataPoint(1,vec3(r,g,b),vec3(nx,ny,nz));
 		builder.addDataPoint(morton_number,point);
 		voxels_read++;
 	}

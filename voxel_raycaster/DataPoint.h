@@ -14,24 +14,24 @@
 class DataPoint {
 public:
 	float opacity;
-	RGBColor color;
+	vec3 color;
 	vec3 normal;
 
 	DataPoint();
-	DataPoint(float opacity, RGBColor color);
-	DataPoint(float opacity, RGBColor color,vec3 normal);
+	DataPoint(float opacity, vec3 color);
+	DataPoint(float opacity, vec3 color, vec3 normal);
 	bool isEmpty();
 };
 
 typedef al::array::array_3d<DataPoint> VoxelData;
 
-inline DataPoint::DataPoint() : opacity(0.0f), color(RGBColor(0,0,0)), normal(vec3(0.0f,0.0f,0.0f)){
+inline DataPoint::DataPoint() : opacity(0.0f), color(vec3(0,0,0)), normal(vec3(0.0f,0.0f,0.0f)){
 }
 
-inline DataPoint::DataPoint(float opacity, RGBColor color) : opacity(opacity), color(color){
+inline DataPoint::DataPoint(float opacity, vec3 color) : opacity(opacity), color(color){
 }
 
-inline DataPoint::DataPoint(float opacity, RGBColor color, vec3 normal) : opacity(opacity), color(color), normal(normal){
+inline DataPoint::DataPoint(float opacity, vec3 color, vec3 normal) : opacity(opacity), color(color), normal(normal){
 }
 
 inline bool DataPoint::isEmpty(){

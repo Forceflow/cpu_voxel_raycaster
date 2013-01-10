@@ -69,7 +69,7 @@ int readAvoxFile(std::string const filename, size_t& _gridlength, VoxelData& _da
 		//float r = (float) (rand() % 150) + 1;
 		//float g = (float) (rand() % 150) + 1;
 		//float b = (float) (rand() % 150) + 1;
-		DataPoint s = DataPoint(1,RGBColor(r,g,b),vec3(nx,ny,nz));
+		DataPoint s = DataPoint(1,vec3(r,g,b),vec3(nx,ny,nz));
 		_data(rx,ry,rz) = s;
 	}
 	cout << "Done." << endl;

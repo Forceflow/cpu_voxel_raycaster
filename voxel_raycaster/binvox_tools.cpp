@@ -81,7 +81,7 @@ int readBinvoxFile(string const filename, size_t& _gridlength, VoxelData& _data)
 						 float r = 255 - ((float(x)/_gridlength)*255);
 						 float g = 255 - ((float(y)/_gridlength)*255);
 						 float b = 255 - ((float(z)/_gridlength)*255);
-						_data(x,y,z) = DataPoint(1, RGBColor(r,g,b));
+						_data(x,y,z) = DataPoint(1, vec3(r,g,b));
 				} else {
 					_data(x,y,z) = DataPoint();
 				}
