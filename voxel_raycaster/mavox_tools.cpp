@@ -72,6 +72,7 @@ int readMavoxFile(std::string const filename, Octree*& tree){
 
 		assert(r >= 0.0f && g >= 0.0f && b >= 0.0f);
 		assert(r <= 1.0f && g <= 1.0f && b <= 1.0f);
+
 		DataPoint point = DataPoint(1,vec3(r,g,b),vec3(nx,ny,nz));
 		builder.addDataPoint(morton_number,point);
 		voxels_read++;

@@ -122,6 +122,7 @@ void loadRenderers(){
 	renderers.push_back(new WorkOctreeRenderer());
 	renderers.push_back(new NormalRenderer());
 	renderers.push_back(new DepthRenderer());
+	renderers.push_back(new DebugRenderer());
 	rendername = renderers.at(current_r)->getName();
 }
 
