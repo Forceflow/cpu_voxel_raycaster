@@ -8,6 +8,7 @@ OctreeBuilder::OctreeBuilder(size_t gridlength, size_t nfilled) : currentdatapos
 	// We store nfilled +1 leaf nodes (first data represents NULL)
 	nfilled++;
 	DataPoint* leafdata = new DataPoint[nfilled];
+	leafdata[0] = DataPoint();
 	currentdatapos++;
 	cout << "Done." << endl;
 
