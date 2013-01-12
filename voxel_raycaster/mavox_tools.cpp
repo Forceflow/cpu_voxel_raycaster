@@ -38,7 +38,7 @@ int readMavoxFile(std::string const filename, Octree*& tree){
 	Timer t = Timer();
 
 	// Open file for reading
-	cout << "Reading " << filename << " ..." << endl; cout.flush();
+	cout << "Reading " << filename << " and building octree ..." << endl; cout.flush();
 	ifstream input = ifstream(filename.c_str(), ios::in); // open filestream for input
 
 	// Parse Mavox header

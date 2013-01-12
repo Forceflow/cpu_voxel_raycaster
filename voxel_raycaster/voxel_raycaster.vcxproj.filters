@@ -135,6 +135,9 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\render</Filter>
     </ClInclude>
+    <ClInclude Include="octree_io.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="voxel_start.cpp">
@@ -194,7 +197,7 @@
     <ClCompile Include="util.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="octree_writer.cpp">
+    <ClCompile Include="octree_io.cpp">
       <Filter>Source Files\io</Filter>
     </ClCompile>
   </ItemGroup>

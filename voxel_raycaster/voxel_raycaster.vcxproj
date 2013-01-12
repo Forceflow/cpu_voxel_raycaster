@@ -41,6 +41,7 @@
     <ClInclude Include="Octree.h" />
     <ClInclude Include="OctreeBuilder.h" />
     <ClInclude Include="octree_generation.h" />
+    <ClInclude Include="octree_io.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="Renderer.h" />
@@ -62,7 +63,7 @@
     <ClCompile Include="NormalRenderer.cpp" />
     <ClCompile Include="OctreeBuilder.cpp" />
     <ClCompile Include="octree_generation.cpp" />
-    <ClCompile Include="octree_writer.cpp" />
+    <ClCompile Include="octree_io.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="TreeTraverser.cpp" />

@@ -17,6 +17,7 @@
 #include "DepthRenderer.h"
 #include "DebugRenderer.h"
 #include "NormalRenderer.h"
+#include "octree_io.h"
 #include <AntTweakBar.h>
 
 using namespace std;
@@ -339,6 +340,9 @@ int main(int argc, char **argv) {
 	octree->min = vec3(0,0,-2);
 	octree->max = vec3(2,2,-4);
 	octree->size = vec3(2,2,2);
+
+	//write octree to cache
+	writeOctree(octree,datafile);
 
 	const int rgba_amount = render_x*render_y*4;
 	data = new unsigned char[rgba_amount]; // put this on heap, it's too big, captain
