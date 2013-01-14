@@ -10,6 +10,7 @@
 
 using namespace std;
 
+int readOctree(std::string basefilename, Octree*& octree);
 int writeOctree(Octree* octree, std::string basefilename);
 
 #endif /* OCTREE_H_ */

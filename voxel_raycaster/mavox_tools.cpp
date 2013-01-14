@@ -63,7 +63,7 @@ int readMavoxFile(std::string const filename, Octree*& tree){
 		vector<uint64_t> dec = mortonDecode(morton_number);
 		size_t rx = dec[2]; size_t ry = dec[1]; size_t rz = dec[0];
 
-		assert(rx > 0.0f && ry > 0.0f && rz > 0.0f);
+		assert(rx >= 0.0f && ry >= 0.0f && rz >= 0.0f);
 		assert(rx < gridlength && ry < gridlength && rz < gridlength);
 
 		float r = ((float) rx) / ((float) gridlength);

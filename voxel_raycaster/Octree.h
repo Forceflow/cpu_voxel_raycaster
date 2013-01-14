@@ -30,6 +30,7 @@ public:
 
 	Octree(VoxelData const* data, vec3 min, vec3 max, vec3 size, size_t gridlength);
 	Octree(vec3 min, vec3 max, vec3 size, size_t gridlength);
+	Octree();
 	size_t storeNode(Node n);
 	const Node* getNode(size_t index) const;
 	const Node* getRootNode() const;
@@ -49,6 +50,8 @@ inline Octree::Octree(vec3 min, vec3 max, vec3 size, size_t gridlength)
 		nodes.push_back(Node()); // push back NULL node
 }
 
+inline Octree::Octree() : min(vec3(0,0,0)), max(vec3(1,1,1)), size(vec3(1,1,1)), gridlength(128){
+}
 
 inline Octree::~Octree(void){
 }
