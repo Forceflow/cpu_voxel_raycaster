@@ -174,7 +174,7 @@ int readOctree(std::string basefilename, Octree*& octree){
 	return 1;
 }
 
-int writeOctree(Octree* octree, std::string basefilename){
+int writeOctree(std::string basefilename, Octree* octree){
 	cout << "Writing octree to cache..." << endl;
 	// compute outputfiles
 	size_t splitpoint = basefilename.find_last_of(".");

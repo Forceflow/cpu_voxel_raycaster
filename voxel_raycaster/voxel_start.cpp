@@ -342,7 +342,7 @@ int main(int argc, char **argv) {
 	octree->size = vec3(2,2,2);
 
 	//write octree to cache
-	writeOctree(octree,datafile);
+	writeOctree(datafile,octree);
 
 	//try to read octree
 	Octree* octree2;

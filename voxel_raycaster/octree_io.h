@@ -11,6 +11,6 @@
 using namespace std;
 
 int readOctree(std::string basefilename, Octree*& octree);
-int writeOctree(Octree* octree, std::string basefilename);
+int writeOctree(std::string basefilename, Octree* octree);
 
 #endif /* OCTREE_H_ */
