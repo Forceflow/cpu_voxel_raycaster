@@ -3,18 +3,17 @@
 using namespace std;
 
 
-int readOctreeData(Octree* octree, std::string filename){
-	cout << "  reading octree leaf data from " << filename << " ... " << endl;
+int readOctreeData(DataPoint*& data, const size_t howmany, const std::string filename){
+	cout << "  reading octree data from " << filename << " ... " << endl;
 	ifstream datafile;
 	datafile.open(filename.c_str(), ios::in | ios::binary);
 
 	//allocate place for data
-	cout << "    allocating " << (octree->n_leafnodes*sizeof(DataPoint))/1024.0f/1024.0f << " MB of memory for voxel data ... "; cout.flush();
-	octree->leafdata = new DataPoint[octree->n_leafnodes];
+	data = new DataPoint[howmany];
 	cout << "Done." << endl;
 
 	// read data
-	for(size_t i = 0; i< octree->n_leafnodes; i++){
+	for(size_t i = 0; i< howmany; i++){
 		DataPoint d = DataPoint();
 		
 		datafile.read(reinterpret_cast<char*> (&d.opacity), sizeof(float));
@@ -26,25 +25,25 @@ int readOctreeData(Octree* octree, std::string filename){
 		datafile.read(reinterpret_cast<char*> (&d.normal[2]), sizeof(float));
 
 		// Store datapoint
-		octree->leafdata[i] = d;
+		data[i] = d;
 	}
 	datafile.close();
 	return 1;
 }
 
-int writeOctreeData(Octree* octree, std::string filename){
+int writeOctreeData(DataPoint*& data, const size_t howmany, const std::string filename){
 	cout << "  writing octree leaf data to " << filename << " ... ";
 	ofstream datafile;
 	datafile.open(filename.c_str(), ios::out|ios::binary);
 
-	for(size_t i = 0; i < octree->n_leafnodes; i++){
-		datafile.write(reinterpret_cast<char*> (& octree->leafdata[i].opacity),sizeof(float));
-		datafile.write(reinterpret_cast<char*> (& octree->leafdata[i].color[0]),sizeof(float));
-		datafile.write(reinterpret_cast<char*> (& octree->leafdata[i].color[1]),sizeof(float));
-		datafile.write(reinterpret_cast<char*> (& octree->leafdata[i].color[2]),sizeof(float));
-		datafile.write(reinterpret_cast<char*> (& octree->leafdata[i].normal[0]),sizeof(float));
-		datafile.write(reinterpret_cast<char*> (& octree->leafdata[i].normal[1]),sizeof(float));
-		datafile.write(reinterpret_cast<char*> (& octree->leafdata[i].normal[2]),sizeof(float));
+	for(size_t i = 0; i < howmany; i++){
+		datafile.write(reinterpret_cast<char*> (& data[i].opacity),sizeof(float));
+		datafile.write(reinterpret_cast<char*> (& data[i].color[0]),sizeof(float));
+		datafile.write(reinterpret_cast<char*> (& data[i].color[1]),sizeof(float));
+		datafile.write(reinterpret_cast<char*> (& data[i].color[2]),sizeof(float));
+		datafile.write(reinterpret_cast<char*> (& data[i].normal[0]),sizeof(float));
+		datafile.write(reinterpret_cast<char*> (& data[i].normal[1]),sizeof(float));
+		datafile.write(reinterpret_cast<char*> (& data[i].normal[2]),sizeof(float));
 	}
 	cout << " Done." << endl;
 	return 1;
@@ -156,12 +155,13 @@ int writeOctreeHeader(Octree* octree, std::string filename){
 int readOctree(std::string basefilename, Octree*& octree){
 	cout << "Reading octree from cache..." << endl;
 
-	// compute input
+	// compute inputfile
 	size_t splitpoint = basefilename.find_last_of(".");
-	stringstream octreecachefile, nodefile, leafdatafile;
+	stringstream octreecachefile, nodefile, leafdatafile, nonleafdatafile;
 	octreecachefile << basefilename.substr(0,splitpoint) << ".octreecache";
 	nodefile << basefilename.substr(0,splitpoint) << ".octreenodes";
-	leafdatafile << basefilename.substr(0,splitpoint) << ".octreedata";
+	leafdatafile << basefilename.substr(0,splitpoint) << ".octreeleafdata";
+	nonleafdatafile << basefilename.substr(0,splitpoint) << ".octreenonleafdata";
 
 	// start reading octree
 	octree = new Octree(); // create empty octree
@@ -169,24 +169,28 @@ int readOctree(std::string basefilename, Octree*& octree){
 	// read header and print statistics
 	readOctreeHeader(octree,octreecachefile.str());
 	readOctreeNodes(octree,nodefile.str());
-	readOctreeData(octree,leafdatafile.str());
+	readOctreeData(octree->leafdata,octree->n_leafnodes,leafdatafile.str());
+	readOctreeData(octree->nonleafdata,octree->n_nonleafnodes,nonleafdatafile.str());
 
 	return 1;
 }
 
 int writeOctree(std::string basefilename, Octree* octree){
 	cout << "Writing octree to cache..." << endl;
+
 	// compute outputfiles
 	size_t splitpoint = basefilename.find_last_of(".");
-	stringstream octreecachefile, nodefile, leafdatafile;
+	stringstream octreecachefile, nodefile, leafdatafile, nonleafdatafile;
 	octreecachefile << basefilename.substr(0,splitpoint) << ".octreecache";
 	nodefile << basefilename.substr(0,splitpoint) << ".octreenodes";
-	leafdatafile << basefilename.substr(0,splitpoint) << ".octreedata";
+	leafdatafile << basefilename.substr(0,splitpoint) << ".octreeleafdata";
+	nonleafdatafile << basefilename.substr(0,splitpoint) << ".octreenonleafdata";
 
 	//write octree parts
 	writeOctreeHeader(octree,octreecachefile.str());
 	writeOctreeNodes(octree,nodefile.str());
-	writeOctreeData(octree,leafdatafile.str());
+	writeOctreeData(octree->leafdata,octree->n_leafnodes,leafdatafile.str());
+	writeOctreeData(octree->nonleafdata,octree->n_nonleafnodes,nonleafdatafile.str());
 	return 1;
 }
 
