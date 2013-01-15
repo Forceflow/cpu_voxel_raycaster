@@ -27,7 +27,9 @@ int readOctreeData(DataPoint*& data, const size_t howmany, const std::string fil
 	datafile.open(filename.c_str(), ios::in | ios::binary);
 
 	//allocate place for data
+	cout << "    allocating " << (howmany*sizeof(DataPoint))/1024.0f/1024.0f << " MB of memory for voxel data ... "; cout.flush(); 
 	data = new DataPoint[howmany];
+	cout << "Done." << endl;
 
 	// read data
 	for(size_t i = 0; i< howmany; i++){
@@ -144,7 +146,8 @@ int readOctreeHeader(Octree* octree, std::string filename){
 	headerfile.close();
 	cout << "    grid size: "<< octree->gridlength << "x" << octree->gridlength << "x" << octree->gridlength << " voxels" << endl;
 	double percentfilled = ((double) octree->n_leafnodes / (double) (octree->gridlength*octree->gridlength*octree->gridlength))*100.0f;
-	cout << "    filled voxels: "<< octree->n_leafnodes << " (" << percentfilled << " %)" << endl;
+	cout << "    filled leaf voxels: "<< octree->n_leafnodes << " (" << percentfilled << " %)" << endl;
+	cout << "    filled non-leaf voxels: "<< octree->n_nonleafnodes << endl;
 	return 1;
 }
 

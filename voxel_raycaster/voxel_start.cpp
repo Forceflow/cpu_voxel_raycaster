@@ -345,6 +345,8 @@ int main(int argc, char **argv) {
 	octree->max = vec3(2,2,-4);
 	octree->size = vec3(2,2,2);
 
+	cout << "Starting rendering ..." << endl;
+
 	const int rgba_amount = render_x*render_y*4;
 	data = new unsigned char[rgba_amount]; // put this on heap, it's too big, captain
 
@@ -364,7 +366,7 @@ int main(int argc, char **argv) {
 	TwGLUTModifiersFunc(glutGetModifiers);
 	TwBar *bar;
 	bar = TwNewBar("VoxelRaycaster");
-	TwDefine(" GLOBAL help='This example shows how to integrate AntTweakBar with GLUT and OpenGL.' "); // Message added to the help bar.
+	TwDefine(" GLOBAL help='' "); // Message added to the help bar.
 	TwDefine(" VoxelRaycaster size='200 200' color='150 150 150' iconified=true fontsize=1"); // change default tweak bar size and color
 	TwAddVarRO(bar, "RendererName", TW_TYPE_STDSTRING, &rendername, 
 			   " label='Renderer Name' group=Renderer help='Current renderer' ");
