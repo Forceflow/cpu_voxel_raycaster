@@ -79,7 +79,7 @@ void setupTexture(){
 void display(void)
 {
 	Timer t = Timer();
-	rendername = renderers.at(current_r)->getName();
+	rendername = renderers.at(current_r)->name;
 	camera.computeUVW(camera.e_,camera.g_,camera.t_);
 
 	memset(data,0,render_context.n_x*render_context.n_y*4);

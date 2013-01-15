@@ -2,7 +2,7 @@
 
 using namespace std;
 
-DiffuseOctreeRenderer::DiffuseOctreeRenderer(void)
+DiffuseOctreeRenderer::DiffuseOctreeRenderer(void) : Renderer("diffuse")
 {
 }
 
@@ -65,10 +65,6 @@ void DiffuseOctreeRenderer::Render(const RenderContext& rc, const Octree const* 
 			}
 		}
 	}
-}
-
-std::string DiffuseOctreeRenderer::getName() const{
-	return "Diffuse";
 }
 
 DiffuseOctreeRenderer::~DiffuseOctreeRenderer(void)

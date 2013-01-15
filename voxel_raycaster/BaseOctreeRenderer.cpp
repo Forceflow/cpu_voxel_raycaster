@@ -2,7 +2,7 @@
 
 using namespace std;
 
-BaseOctreeRenderer::BaseOctreeRenderer(void)
+BaseOctreeRenderer::BaseOctreeRenderer(void) : Renderer("base")
 {
 }
 
@@ -35,10 +35,6 @@ void BaseOctreeRenderer::Render(const RenderContext& rc, const Octree const* tre
 			}
 		}
 	}
-}
-
-std::string BaseOctreeRenderer::getName() const{
-	return "Base Color";
 }
 
 BaseOctreeRenderer::~BaseOctreeRenderer(void)

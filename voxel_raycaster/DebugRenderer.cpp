@@ -1,7 +1,7 @@
 #include "DebugRenderer.h"
 
 
-DebugRenderer::DebugRenderer(void)
+DebugRenderer::DebugRenderer(void) : Renderer ("debug")
 {
 }
 
@@ -28,10 +28,6 @@ void DebugRenderer::Render(const RenderContext& rc, const Octree const* tree, un
 
 void DebugRenderer::RenderWork(const RenderContext& rc,const Octree const* tree, unsigned char* texture_array) const{
 	//
-}
-
-std::string DebugRenderer::getName() const{
-	return "Debug";
 }
 
 DebugRenderer::~DebugRenderer(void)

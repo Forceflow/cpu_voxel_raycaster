@@ -2,7 +2,7 @@
 
 using namespace std;
 
-WorkOctreeRenderer::WorkOctreeRenderer(void)
+WorkOctreeRenderer::WorkOctreeRenderer(void) : Renderer("work")
 {
 }
 
@@ -35,10 +35,6 @@ void WorkOctreeRenderer::Render(const RenderContext& rc, const Octree const* tre
 			texture_array[index+3] = (unsigned char) 1;
 		}
 	}
-}
-
-std::string WorkOctreeRenderer::getName() const{
-	return "Work";
 }
 
 WorkOctreeRenderer::~WorkOctreeRenderer(void)

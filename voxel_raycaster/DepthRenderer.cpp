@@ -2,7 +2,7 @@
 
 using namespace std;
 
-DepthRenderer::DepthRenderer(void)
+DepthRenderer::DepthRenderer(void) : Renderer("depth")
 {
 }
 
@@ -44,10 +44,6 @@ void DepthRenderer::Render(const RenderContext& rc, const Octree const* tree, un
 			}
 		}
 	}
-}
-
-std::string DepthRenderer::getName() const{
-	return "Depth";
 }
 
 DepthRenderer::~DepthRenderer(void)

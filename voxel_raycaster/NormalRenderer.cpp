@@ -2,7 +2,7 @@
 
 using namespace std;
 
-NormalRenderer::NormalRenderer(void)
+NormalRenderer::NormalRenderer(void) : Renderer("normal")
 {
 }
 
@@ -44,10 +44,6 @@ void NormalRenderer::Render(const RenderContext& rc, const Octree const* tree, u
 			}
 		}
 	}
-}
-
-std::string NormalRenderer::getName() const{
-	return "Normals";
 }
 
 NormalRenderer::~NormalRenderer(void)
