@@ -29,16 +29,11 @@ RenderContext render_context;
 
 // renderer
 vector<Renderer*> renderers;
-int current_r = 0;
 string rendername;
-
-// lightselector
+int current_r = 0;
 int lightselector = 0;
 
-// our voxel grid
 Octree* octree = NULL;
-
-// generated render
 unsigned char* data;
 
 // OpenGL
