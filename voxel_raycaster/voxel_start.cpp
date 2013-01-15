@@ -17,6 +17,7 @@
 #include "DepthRenderer.h"
 #include "DebugRenderer.h"
 #include "NormalRenderer.h"
+#include "RendererManager.h"
 #include "octree_io.h"
 #include <AntTweakBar.h>
 
@@ -28,7 +29,7 @@ Frustrum frustrum;
 RenderContext render_context;
 
 // renderer
-vector<Renderer*> renderers;
+RendererManager rmanager;
 string rendername;
 int current_r = 0;
 int lightselector = 0;
@@ -79,11 +80,11 @@ void setupTexture(){
 void display(void)
 {
 	Timer t = Timer();
-	rendername = renderers.at(current_r)->name;
+	rendername = rmanager.getCurrentRenderer()->name;
 	camera.computeUVW(camera.e_,camera.g_,camera.t_);
 
 	memset(data,0,render_context.n_x*render_context.n_y*4);
-	renderers.at(current_r)->Render(render_context,octree,data);
+	rmanager.getCurrentRenderer()->Render(render_context,octree,data);
 
 	generateTexture();
 	drawFullsizeQuad();
@@ -113,17 +114,14 @@ void reshape(int w, int h)
 }
 
 void loadRenderers(){
-	renderers.push_back(new DiffuseOctreeRenderer());
-	renderers.push_back(new BaseOctreeRenderer());
-	renderers.push_back(new WorkOctreeRenderer());
-	renderers.push_back(new NormalRenderer());
-	renderers.push_back(new DepthRenderer());
-	renderers.push_back(new DebugRenderer());
-	rendername = renderers.at(current_r)->getName();
-}
-
-void switchRenderer(){
-	current_r = (current_r+1) % renderers.size();
+	rmanager = RendererManager();
+	rmanager.addRenderer(new DiffuseOctreeRenderer());
+	rmanager.addRenderer(new BaseOctreeRenderer());
+	rmanager.addRenderer(new WorkOctreeRenderer());
+	rmanager.addRenderer(new NormalRenderer());
+	rmanager.addRenderer(new DepthRenderer());
+	rmanager.addRenderer(new DebugRenderer());
+	rendername = rmanager.getCurrentRenderer()->name;
 }
 
 // Keyboard
@@ -178,7 +176,7 @@ void keyboardfunc(unsigned char key, int x, int y)
 			cout << "light selector:" << lightselector << endl;
 			break;
 		case 'p':
-			switchRenderer();
+			rmanager.switchRenderer();
 			break;
 		case 'i':
 			{string filename = "image"+getTimeString()+"";

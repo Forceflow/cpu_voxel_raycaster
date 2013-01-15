@@ -45,6 +45,7 @@
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RendererManager.h" />
     <ClInclude Include="TreeTraverser.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="VoxelGenerator.h" />

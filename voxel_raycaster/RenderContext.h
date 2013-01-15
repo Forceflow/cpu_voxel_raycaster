@@ -19,7 +19,6 @@ public:
 	Camera const* camera;
 	Frustrum const* frustrum;
 	std::vector<Light> lights;
-	Light light;
 	int n_x;
 	int n_y;
 
