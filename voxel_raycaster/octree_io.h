@@ -4,12 +4,12 @@
 
 #include "Octree.h"
 #include <string>
-#include <string>
 #include <fstream>
 #include <iostream>
 
 using namespace std;
 
+bool checkForOctreeCache(std::string basefilename);
 int readOctree(std::string basefilename, Octree*& octree);
 int writeOctree(std::string basefilename, Octree* octree);
 

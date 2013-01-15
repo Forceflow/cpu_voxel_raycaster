@@ -307,7 +307,6 @@ int main(int argc, char **argv) {
 	unsigned int rendersize = 640;
 	FileFormat inputformat;
 	parseParameters(argc,argv,datafile,moctreefile,inputformat,rendersize);
-	
 
 	// Initialize render system
 	unsigned int render_x = rendersize;
@@ -332,22 +331,19 @@ int main(int argc, char **argv) {
 		generateOctree(gridlength,&mydata,morton_array,&octree);
 	}
 	else if(inputformat == MAVOX){
-		if(!readMavoxFile(datafile,octree)){
-			cout << "Error reading mavox file..." << endl; exit(0);
+		if(checkForOctreeCache(datafile)){
+			readOctree(datafile,octree); // read the octree from cache
+		} else {
+			if(!readMavoxFile(datafile,octree)){ // build the octree
+				cout << "Error reading mavox file..." << endl; exit(0);
+			}
+			writeOctree(datafile,octree); // write it to cache
 		}
 	}
 	
 	octree->min = vec3(0,0,-2);
 	octree->max = vec3(2,2,-4);
 	octree->size = vec3(2,2,2);
-
-	//write octree to cache
-	writeOctree(datafile,octree);
-
-	//try to read octree
-	Octree* octree2;
-	readOctree(datafile,octree2);
-	octree = octree2;
 
 	const int rgba_amount = render_x*render_y*4;
 	data = new unsigned char[rgba_amount]; // put this on heap, it's too big, captain

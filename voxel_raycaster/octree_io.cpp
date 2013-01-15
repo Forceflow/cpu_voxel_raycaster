@@ -2,6 +2,24 @@
 
 using namespace std;
 
+bool checkForOctreeCache(std::string basefilename){
+
+	size_t splitpoint = basefilename.find_last_of(".");
+	stringstream octreecachefile;
+	octreecachefile << basefilename.substr(0,splitpoint) << ".octreecache";
+
+	cout << "Checking for octree cache ... "; 
+
+	ifstream checkfile(octreecachefile.str().c_str());
+	if(checkfile.good()){
+		checkfile.close();
+		cout << "Exists!" << endl;
+		return true;
+	}
+	checkfile.close();
+	cout << "Not found." << endl;
+	return false;
+}
 
 int readOctreeData(DataPoint*& data, const size_t howmany, const std::string filename){
 	cout << "  reading octree data from " << filename << " ... " << endl;
@@ -10,7 +28,6 @@ int readOctreeData(DataPoint*& data, const size_t howmany, const std::string fil
 
 	//allocate place for data
 	data = new DataPoint[howmany];
-	cout << "Done." << endl;
 
 	// read data
 	for(size_t i = 0; i< howmany; i++){
@@ -32,7 +49,7 @@ int readOctreeData(DataPoint*& data, const size_t howmany, const std::string fil
 }
 
 int writeOctreeData(DataPoint*& data, const size_t howmany, const std::string filename){
-	cout << "  writing octree leaf data to " << filename << " ... ";
+	cout << "  writing octree leaf data to " << filename << " ... " << endl;
 	ofstream datafile;
 	datafile.open(filename.c_str(), ios::out|ios::binary);
 
@@ -45,7 +62,6 @@ int writeOctreeData(DataPoint*& data, const size_t howmany, const std::string fi
 		datafile.write(reinterpret_cast<char*> (& data[i].normal[1]),sizeof(float));
 		datafile.write(reinterpret_cast<char*> (& data[i].normal[2]),sizeof(float));
 	}
-	cout << " Done." << endl;
 	return 1;
 }
 
