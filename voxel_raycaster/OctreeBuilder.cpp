@@ -92,20 +92,45 @@ void OctreeBuilder::addDataPoint(uint64_t morton_number, DataPoint point){
 void OctreeBuilder::buildLevels(){
 	this->finalizeOctree(); // we can't build levels if octree is not complete
 	octree->n_nonleafnodes = octree->nodes.size() - octree->n_leafnodes;
+	cout << "  allocating " << (octree->n_nonleafnodes*sizeof(DataPoint))/1024.0f/1024.0f << " MB of memory for upper level voxel data ... "; cout.flush();
+	octree->nonleafdata = new DataPoint[octree->n_nonleafnodes];
+	cout << "Done." << endl;
 
+	// start by refining root node
+	size_t currentdatapos = 0;
+	refineNode(octree->getRootNode(), currentdatapos);
 
 }
 
-void OctreeBuilder::refineNode(Node* n){
+void OctreeBuilder::refineNode(Node* n, size_t& currentdatapos){
 	if(n->hasData()){  // this node already has data assigned: no need to refine
 		return;
 	}
+
+	// CONSTRUCT DATAPOINT
+	DataPoint d = DataPoint();
 	for(int i = 0; i < 8; i++){ // this node has no data: need to refine
-		if(n->children[i] != NULL){
-			refineNode(octree->getNode(n->children[i]));
+		if(n->children[i] != NULL){ // if child exists
+			refineNode(octree->getNode(n->children[i]), currentdatapos); // make sure every child node has data
+			if(octree->getNode(n->children[i])->isLeaf()){ // if the child is a LEAF
+				d.opacity += octree->leafdata[octree->getNode(n->children[i])->data].opacity;
+				d.color += octree->leafdata[octree->getNode(n->children[i])->data].color;
+				d.normal += octree->leafdata[octree->getNode(n->children[i])->data].normal;
+			}
+			else{ // if the child is not a leaf
+				d.opacity += octree->nonleafdata[octree->getNode(n->children[i])->data].opacity;
+				d.color += octree->nonleafdata[octree->getNode(n->children[i])->data].color;
+				d.normal += octree->nonleafdata[octree->getNode(n->children[i])->data].normal;
+			}
 		}
 	}
-	// create new datapoint
-	DataPoint d = DataPoint();
-	
+
+	// SAVE DATAPOINT
+	d.color = d.color / 8.0f;
+	d.normal = d.normal / 8.0f;
+	d.opacity = d.opacity / 8.0f;
+
+	octree->nonleafdata[currentdatapos] = d;
+	n->data = currentdatapos;
+	currentdatapos++;
 }

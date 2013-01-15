@@ -80,6 +80,7 @@ int readMavoxFile(std::string const filename, Octree*& tree){
 	cout << "Done." << endl;
 	// Finalize octree and get it
 	builder.finalizeOctree();
+	builder.buildLevels();
 	tree = builder.getOctree();
 	cout << "  finished in " << t.getTimeMilliseconds() << " milliseconds" << endl;
 	return 1;

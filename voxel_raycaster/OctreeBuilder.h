@@ -36,7 +36,7 @@ private:
 	size_t currentdatapos;
 	 
 	// helper functions
-	void refineNode(Node* n);
+	void refineNode(Node* n, size_t& currentdatapos);
 	bool isBufferEmpty(const vector<Node> &buffer);
 	Node groupNodes(Octree* _octree, const vector<Node> &buffer);
 

@@ -345,10 +345,9 @@ int main(int argc, char **argv) {
 	writeOctree(datafile,octree);
 
 	//try to read octree
-	Octree* octree2;
-	readOctree(datafile,octree2);
-
-	octree = octree2;
+	//Octree* octree2;
+	//readOctree(datafile,octree2);
+	//octree = octree2;
 
 	const int rgba_amount = render_x*render_y*4;
 	data = new unsigned char[rgba_amount]; // put this on heap, it's too big, captain
