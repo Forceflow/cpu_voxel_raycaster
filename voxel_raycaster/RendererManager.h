@@ -1,6 +1,7 @@
 #ifndef RENDERERMANAGER_H_
 #define RENDERERMANAGER_H_
 
+#include <string>
 #include <vector>
 #include "Renderer.h"
 
@@ -10,6 +11,7 @@ public:
 	RendererManager();
 	void addRenderer(Renderer* r);
 	Renderer* getCurrentRenderer();
+	Renderer* getRenderer(std::string name);
 	void switchRenderer();
 
 private:
@@ -31,6 +33,15 @@ inline void RendererManager::switchRenderer(){
 
 inline void RendererManager::addRenderer(Renderer* r){
 	renderers.push_back(r);
+}
+
+inline Renderer* RendererManager::getRenderer(std::string name){
+	for(std::vector<Renderer*>::iterator it = renderers.begin() ; it != renderers.end(); ++it){
+		if((*it)->name == name){
+			return *it;
+		}
+	}
+	return NULL;
 }
 
 #endif
