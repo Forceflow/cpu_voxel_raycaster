@@ -51,12 +51,19 @@ inline bool OctreeBuilder::isBufferEmpty(const vector<Node> &buffer){
 
 inline Node OctreeBuilder::groupNodes(Octree* _octree, const vector<Node> &buffer){
 	Node parent = Node();
+	bool first_stored_child = true;
 	for(int k = 0; k<8; k++){
 		if(!buffer[k].isNull()){
-			parent.children[k] = _octree->storeNode(buffer[k]);
+			if(first_stored_child){
+					parent.children_base = _octree->storeNode(buffer[k]);
+					parent.children_offset[k] = 0;
+					first_stored_child = false;
+			} else {
+				parent.children_offset[k] = _octree->storeNode(buffer[k]) - parent.children_base;
+			}
 		}
 		else{
-			parent.children[k] = NULL;
+			parent.children_offset[k] = NOCHILD;
 		}
 	}
 	return parent;

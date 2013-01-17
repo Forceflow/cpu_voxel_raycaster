@@ -111,19 +111,19 @@ void OctreeBuilder::refineNode(Node* n, size_t& currentdatapos){
 	DataPoint d = DataPoint();
 	float notnull = 0.0f;
 	for(int i = 0; i < 8; i++){ // this node has no data: need to refine
-		if(n->children[i] != NULL){ // if child exists
+		if(n->hasChild(i)){ // if child exists
 			notnull++;
-			refineNode(octree->getNode(n->children[i]), currentdatapos); // make sure every child node has data
+			refineNode(octree->getNode(n->getChildPos(i)), currentdatapos); // make sure every child node has data
 			DataPoint* data;
-			if(octree->getNode(n->children[i])->isLeaf()){ 
+			if(octree->getNode(n->getChildPos(i))->isLeaf()){ 
 				data = octree->leafdata;
 			}else { 
 				data = octree->nonleafdata;
 			}
 
-			d.opacity += data[octree->getNode(n->children[i])->data].opacity;
-			d.color += data[octree->getNode(n->children[i])->data].color;
-			d.normal += data[octree->getNode(n->children[i])->data].normal;
+			d.opacity += data[octree->getNode(n->getChildPos(i))->data].opacity;
+			d.color += data[octree->getNode(n->getChildPos(i))->data].color;
+			d.normal += data[octree->getNode(n->getChildPos(i))->data].normal;
 		}
 	}
 

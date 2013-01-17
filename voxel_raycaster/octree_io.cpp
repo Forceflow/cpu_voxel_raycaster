@@ -76,14 +76,15 @@ int readOctreeNodes(Octree* octree, std::string filename){
 		Node n = Node();
 
 		// read children
-		nodefile.read(reinterpret_cast<char*> (& (n.children[0])), sizeof(size_t));
-		nodefile.read(reinterpret_cast<char*> (& (n.children[1])), sizeof(size_t));
-		nodefile.read(reinterpret_cast<char*> (& (n.children[2])), sizeof(size_t));
-		nodefile.read(reinterpret_cast<char*> (& (n.children[3])), sizeof(size_t));
-		nodefile.read(reinterpret_cast<char*> (& (n.children[4])), sizeof(size_t));
-		nodefile.read(reinterpret_cast<char*> (& (n.children[5])), sizeof(size_t));
-		nodefile.read(reinterpret_cast<char*> (& (n.children[6])), sizeof(size_t));
-		nodefile.read(reinterpret_cast<char*> (& (n.children[7])), sizeof(size_t));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_base)), sizeof(size_t));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_offset[0])), sizeof(char));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_offset[1])), sizeof(char));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_offset[2])), sizeof(char));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_offset[3])), sizeof(char));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_offset[4])), sizeof(char));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_offset[5])), sizeof(char));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_offset[6])), sizeof(char));
+		nodefile.read(reinterpret_cast<char*> (& (n.children_offset[7])), sizeof(char));
 
 		// read data pointer
 		nodefile.read(reinterpret_cast<char*> (& (n.data)), sizeof(size_t));
@@ -103,14 +104,15 @@ int writeOctreeNodes(Octree* octree, std::string filename){
 
 	for(size_t i = 0; i< octree->nodes.size(); i++){
 		// write children
-		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children[0]),sizeof(size_t));
-		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children[1]),sizeof(size_t));
-		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children[2]),sizeof(size_t));
-		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children[3]),sizeof(size_t));
-		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children[4]),sizeof(size_t));
-		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children[5]),sizeof(size_t));
-		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children[6]),sizeof(size_t));
-		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children[7]),sizeof(size_t));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_base),sizeof(size_t));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_offset[0]),sizeof(char));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_offset[1]),sizeof(char));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_offset[2]),sizeof(char));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_offset[3]),sizeof(char));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_offset[4]),sizeof(char));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_offset[5]),sizeof(char));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_offset[6]),sizeof(char));
+		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].children_offset[7]),sizeof(char));
 		// write data pointer
 		nodefile.write(reinterpret_cast<char*> (& octree->nodes[i].data),sizeof(size_t));
 	}

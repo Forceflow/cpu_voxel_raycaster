@@ -12,7 +12,7 @@ bool isBufferEmpty(const vector<Node> &buffer){
 Node groupNodes(Octree** _octree, const vector<Node> &buffer){
 	Node parent = Node();
 	for(int k = 0; k<8; k++){
-		parent.children[k] = (*_octree)->storeNode(buffer[k]);
+		//parent.children[k] = (*_octree)->storeNode(buffer[k]);
 	}
 	return parent;
 }

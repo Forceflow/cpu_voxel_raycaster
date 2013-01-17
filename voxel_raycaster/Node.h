@@ -7,13 +7,19 @@
 #include <string>
 #include <cstdint>
 
+#define NOCHILD -1
+
 class Node
 {
 public:
-	size_t children[8];
+	size_t children_base;
+	char children_offset[8];
+	//size_t children[8];
 	size_t data;
 
 	Node();
+	bool hasChild(int i) const;
+	size_t getChildPos(int i) const;
 	bool isLeaf() const;
 	bool hasData() const;
 	bool isNull() const;
@@ -22,7 +28,23 @@ public:
 inline Node::Node(){
 	data = 0;
 	for(int i = 0; i<8; i++){
-		children[i] = 0;
+		children_offset[i] = NOCHILD;
+	}
+}
+
+inline bool Node::hasChild(int i) const{
+	if(children_offset[i] == NOCHILD){
+		return false;
+	}
+	return true;
+}
+
+inline size_t Node::getChildPos(int i) const{
+	if(children_offset[i] == NOCHILD){
+		return 0;
+	}
+	else{
+		return children_base + children_offset[i];
 	}
 }
 
@@ -31,7 +53,7 @@ inline bool Node::isNull() const{
 }
 
 inline bool Node::isLeaf() const{
-	for(int i = 0; i<8; i++){if(children[i] != 0){return false;}}
+	for(int i = 0; i<8; i++){if(children_offset[i] != NOCHILD){return false;}}
 	return true;
 }
 
