@@ -10,7 +10,6 @@ class BaseOctreeRenderer : public Renderer
 public:
 	BaseOctreeRenderer(void);
 	void Render(RenderContext const& rc, Octree const* tree, unsigned char* texture_array) const;
-	std::string getName() const;
 	~BaseOctreeRenderer(void);
 };
 

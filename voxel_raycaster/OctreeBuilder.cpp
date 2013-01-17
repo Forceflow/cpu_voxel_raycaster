@@ -109,26 +109,28 @@ void OctreeBuilder::refineNode(Node* n, size_t& currentdatapos){
 
 	// CONSTRUCT DATAPOINT
 	DataPoint d = DataPoint();
+	float notnull = 0.0f;
 	for(int i = 0; i < 8; i++){ // this node has no data: need to refine
 		if(n->children[i] != NULL){ // if child exists
+			notnull++;
 			refineNode(octree->getNode(n->children[i]), currentdatapos); // make sure every child node has data
-			if(octree->getNode(n->children[i])->isLeaf()){ // if the child is a LEAF
-				d.opacity += octree->leafdata[octree->getNode(n->children[i])->data].opacity;
-				d.color += octree->leafdata[octree->getNode(n->children[i])->data].color;
-				d.normal += octree->leafdata[octree->getNode(n->children[i])->data].normal;
+			DataPoint* data;
+			if(octree->getNode(n->children[i])->isLeaf()){ 
+				data = octree->leafdata;
+			}else { 
+				data = octree->nonleafdata;
 			}
-			else{ // if the child is not a leaf
-				d.opacity += octree->nonleafdata[octree->getNode(n->children[i])->data].opacity;
-				d.color += octree->nonleafdata[octree->getNode(n->children[i])->data].color;
-				d.normal += octree->nonleafdata[octree->getNode(n->children[i])->data].normal;
-			}
+
+			d.opacity += data[octree->getNode(n->children[i])->data].opacity;
+			d.color += data[octree->getNode(n->children[i])->data].color;
+			d.normal += data[octree->getNode(n->children[i])->data].normal;
 		}
 	}
 
 	// SAVE DATAPOINT
-	d.color = d.color / 8.0f;
-	d.normal = d.normal / 8.0f;
-	d.opacity = d.opacity / 8.0f;
+	d.color = d.color / notnull;
+	d.normal = normalize((vec3) (d.normal / notnull));
+	d.opacity = d.opacity / notnull;
 
 	octree->nonleafdata[currentdatapos] = d;
 	n->data = currentdatapos;

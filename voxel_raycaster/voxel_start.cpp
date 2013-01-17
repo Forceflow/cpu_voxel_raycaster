@@ -17,6 +17,7 @@
 #include "DepthRenderer.h"
 #include "DebugRenderer.h"
 #include "NormalRenderer.h"
+#include "LevelRenderer.h"
 #include "RendererManager.h"
 #include "octree_io.h"
 #include <AntTweakBar.h>
@@ -121,6 +122,7 @@ void loadRenderers(){
 	rmanager.addRenderer(new NormalRenderer());
 	rmanager.addRenderer(new DepthRenderer());
 	rmanager.addRenderer(new DebugRenderer());
+	rmanager.addRenderer(new LevelRenderer());
 	rendername = rmanager.getCurrentRenderer()->name;
 }
 
@@ -177,6 +179,11 @@ void keyboardfunc(unsigned char key, int x, int y)
 			break;
 		case 'p':
 			rmanager.switchRenderer();
+			break;
+		case 'l':
+			{LevelRenderer* lr = dynamic_cast<LevelRenderer*>(rmanager.getRenderer("level"));
+			lr->maxlevel = (lr->maxlevel +1) % (log2(octree->gridlength)+2);
+			cout << "Max level for Level renderer: " << lr->maxlevel << endl;}
 			break;
 		case 'i':
 			{string filename = "image"+getTimeString()+"";

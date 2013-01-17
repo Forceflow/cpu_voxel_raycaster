@@ -141,6 +141,9 @@
     <ClInclude Include="RendererManager.h">
       <Filter>Header Files\render</Filter>
     </ClInclude>
+    <ClInclude Include="LevelRenderer.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="voxel_start.cpp">
@@ -202,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="octree_io.cpp">
       <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelRenderer.cpp">
+      <Filter>Source Files\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
