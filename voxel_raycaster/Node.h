@@ -14,7 +14,6 @@ class Node
 public:
 	size_t children_base;
 	char children_offset[8];
-	//size_t children[8];
 	size_t data;
 
 	Node();
@@ -42,8 +41,7 @@ inline bool Node::hasChild(int i) const{
 inline size_t Node::getChildPos(int i) const{
 	if(children_offset[i] == NOCHILD){
 		return 0;
-	}
-	else{
+	} else {
 		return children_base + children_offset[i];
 	}
 }

@@ -64,43 +64,43 @@ void TreeTraverser::step(){
 		} return;}
 	case 1: { 
 		stack.back().nextchild = newNode(tm[0],5,tm[1],3,t1[2],8);
-		if(stack.back().node->hasChild(1^a) != 0){
+		if(stack.back().node->hasChild(1^a)){
 			TraversalNodeInfo_ info = buildNodeInfo(t0[0],t0[1],tm[2],tm[0],tm[1],t1[2],octree->getNode(stack.back().node->getChildPos(1^a)));
 			stack.push_back(info);
 		} return;}
 	case 2: { 
 		stack.back().nextchild = newNode(tm[0],6,t1[1],8,tm[2],3);
-		if(stack.back().node->hasChild(2^a) != 0){
+		if(stack.back().node->hasChild(2^a)){
 			TraversalNodeInfo_ info = buildNodeInfo(t0[0],tm[1],t0[2],tm[0],t1[1],tm[2],octree->getNode(stack.back().node->getChildPos(2^a)));
 			stack.push_back(info);
 		} return;}
 	case 3: { 
 		stack.back().nextchild = newNode(tm[0],7,t1[1],8,t1[2],8);
-		if(stack.back().node->hasChild(3^a) != 0){
+		if(stack.back().node->hasChild(3^a)){
 			TraversalNodeInfo_ info = buildNodeInfo(t0[0],tm[1],tm[2],tm[0],t1[1],t1[2],octree->getNode(stack.back().node->getChildPos(3^a)));
 			stack.push_back(info);
 		} return;}
 	case 4: { 
 		stack.back().nextchild = newNode(t1[0],8,tm[1],6,tm[2],5);
-		if(stack.back().node->hasChild(4^a) != 0){
+		if(stack.back().node->hasChild(4^a)){
 			TraversalNodeInfo_ info = buildNodeInfo(tm[0],t0[1],t0[2],t1[0],tm[1],tm[2],octree->getNode(stack.back().node->getChildPos(4^a)));
 			stack.push_back(info);
 		} return;}
 	case 5: { 
 		stack.back().nextchild = newNode(t1[0],8,tm[1],7,t1[2],8);
-		if(stack.back().node->hasChild(5^a) != 0){
+		if(stack.back().node->hasChild(5^a)){
 			TraversalNodeInfo_ info = buildNodeInfo(tm[0],t0[1],tm[2],t1[0],tm[1],t1[2],octree->getNode(stack.back().node->getChildPos(5^a)));
 			stack.push_back(info);
 		} return;}
 	case 6: { 
 		stack.back().nextchild = newNode(t1[0],8,t1[1],8,tm[2],7);
-		if(stack.back().node->hasChild(6^a) != 0){
+		if(stack.back().node->hasChild(6^a)){
 			TraversalNodeInfo_ info = buildNodeInfo(tm[0],tm[1],t0[2],t1[0],t1[1],tm[2],octree->getNode(stack.back().node->getChildPos(6^a)));
 			stack.push_back(info);
 		} return;}
 	case 7: { 
 		stack.back().nextchild = 8;
-		if(stack.back().node->hasChild(7^a) != 0){
+		if(stack.back().node->hasChild(7^a)){
 			TraversalNodeInfo_ info = buildNodeInfo(tm[0],tm[1],tm[2],t1[0],t1[1],t1[2],octree->getNode(stack.back().node->getChildPos(7^a)));
 			stack.push_back(info);
 		} return;}
