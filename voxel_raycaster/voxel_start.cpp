@@ -223,7 +223,7 @@ void printInvalid(){
 	std::cout << "For Example: voxelraycaster.exe -f /home/jeroen/bunny256.avox" << endl;
 }
 
-void parseParameters(int argc, char **argv, string& datafile, string& moctreefile, FileFormat& inputformat, unsigned int& rendersize){
+void parseParameters(int argc, char **argv, string& datafile, string& moctreefile, FileFormat& inputformat, unsigned int& rendersize, bool& force_cache_regen){
 	if(argc < 2){ printInvalid(); exit(0);}
 	for (int i = 1; i < argc; i++) {
 		if (string(argv[i]) == "-f") {
@@ -258,6 +258,8 @@ void parseParameters(int argc, char **argv, string& datafile, string& moctreefil
 		} else if (string(argv[i]) == "-s") {
 			rendersize = atoi(argv[i + 1]); 
 			i++;
+		} else if (string(argv[i]) == "-r") {
+			force_cache_regen = true; 
 		} else {printInvalid(); exit(0);}
 	}
 }
@@ -304,9 +306,10 @@ int main(int argc, char **argv) {
 	// Input argument validation
 	string moctreefile = "";
 	string datafile = "";
+	bool force_cache_regen = false;
 	unsigned int rendersize = 640;
 	FileFormat inputformat;
-	parseParameters(argc,argv,datafile,moctreefile,inputformat,rendersize);
+	parseParameters(argc,argv,datafile,moctreefile,inputformat,rendersize,force_cache_regen);
 
 	// Initialize render system
 	unsigned int render_x = rendersize;
@@ -331,7 +334,7 @@ int main(int argc, char **argv) {
 		generateOctree(gridlength,&mydata,morton_array,&octree);
 	}
 	else if(inputformat == MAVOX){
-		if(checkForOctreeCache(datafile)){
+		if(checkForOctreeCache(datafile) && !force_cache_regen){
 			readOctree(datafile,octree); // read the octree from cache
 		} else {
 			if(!readMavoxFile(datafile,octree)){ // build the octree
