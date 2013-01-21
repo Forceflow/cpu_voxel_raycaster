@@ -65,15 +65,21 @@ int readMavoxFile(std::string const filename, Octree*& tree){
 
 		assert(rx >= 0.0f && ry >= 0.0f && rz >= 0.0f);
 		assert(rx < gridlength && ry < gridlength && rz < gridlength);
-
 		float r = ((float) rx) / ((float) gridlength);
 		float g = ((float) ry) / ((float) gridlength);
 		float b = ((float) rz) / ((float) gridlength);
-
 		assert(r >= 0.0f && g >= 0.0f && b >= 0.0f);
 		assert(r <= 1.0f && g <= 1.0f && b <= 1.0f);
 
-		DataPoint point = DataPoint(1,vec3(r,g,b),vec3(nx,ny,nz));
+		// DEFINE VOXEL COLOR FROM NOISE
+		rand_urng rng;
+		rng.seed(1234);
+		perlin_noise::perlin_noise_3d perlin(rng);
+
+		float noise = perlin.noise(r*10,g*10,b*10);
+		noise = (0.5 / (3.0 * std::sqrt(perlin.variance()))) * noise + 0.5;
+
+		DataPoint point = DataPoint(1,vec3(noise,noise,noise),vec3(nx,ny,nz));
 		builder.addDataPoint(morton_number,point);
 		voxels_read++;
 	}

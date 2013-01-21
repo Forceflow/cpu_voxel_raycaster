@@ -43,6 +43,7 @@
     <ClInclude Include="OctreeBuilder.h" />
     <ClInclude Include="octree_generation.h" />
     <ClInclude Include="octree_io.h" />
+    <ClInclude Include="perlin_noise.hpp" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="Renderer.h" />

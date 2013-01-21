@@ -46,6 +46,9 @@
     <Filter Include="Source Files\view">
       <UniqueIdentifier>{ea7c3233-48f0-416b-8188-563f9137df32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="noise">
+      <UniqueIdentifier>{206e3a3a-a97a-4b25-990c-b711d721a380}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataPoint.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="LevelRenderer.h">
       <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="perlin_noise.hpp">
+      <Filter>noise</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

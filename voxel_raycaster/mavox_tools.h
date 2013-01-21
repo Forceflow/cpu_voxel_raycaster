@@ -9,6 +9,7 @@
 #include "DataPoint.h"
 #include "Octree.h"
 #include "OctreeBuilder.h"
+#include "perlin_noise.hpp"
 
 int readMavoxFile(std::string const filename, Octree*& tree);
 
