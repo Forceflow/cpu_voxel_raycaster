@@ -18,6 +18,7 @@
 #include "DebugRenderer.h"
 #include "NormalRenderer.h"
 #include "LevelRenderer.h"
+#include "TopLevelRenderer.h"
 #include "RendererManager.h"
 #include "octree_io.h"
 #include <AntTweakBar.h>
@@ -123,6 +124,7 @@ void loadRenderers(){
 	rmanager.addRenderer(new DepthRenderer());
 	rmanager.addRenderer(new DebugRenderer());
 	rmanager.addRenderer(new LevelRenderer());
+	rmanager.addRenderer(new TopLevelRenderer());
 	rendername = rmanager.getCurrentRenderer()->name;
 }
 

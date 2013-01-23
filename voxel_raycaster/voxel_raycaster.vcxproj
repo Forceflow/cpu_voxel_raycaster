@@ -48,6 +48,7 @@
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RendererManager.h" />
+    <ClInclude Include="TopLevelRenderer.h" />
     <ClInclude Include="TreeTraverser.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="VoxelGenerator.h" />
@@ -70,6 +71,7 @@
     <ClCompile Include="octree_io.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RenderContext.cpp" />
+    <ClCompile Include="TopLevelRenderer.cpp" />
     <ClCompile Include="TreeTraverser.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="VoxelGenerator.cpp" />

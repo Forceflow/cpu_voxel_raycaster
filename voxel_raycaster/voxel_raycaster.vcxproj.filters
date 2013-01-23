@@ -150,6 +150,9 @@
     <ClInclude Include="perlin_noise.hpp">
       <Filter>noise</Filter>
     </ClInclude>
+    <ClInclude Include="TopLevelRenderer.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="voxel_start.cpp">
@@ -213,6 +216,9 @@
       <Filter>Source Files\io</Filter>
     </ClCompile>
     <ClCompile Include="LevelRenderer.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="TopLevelRenderer.cpp">
       <Filter>Source Files\render</Filter>
     </ClCompile>
   </ItemGroup>

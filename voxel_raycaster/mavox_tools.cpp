@@ -76,7 +76,7 @@ int readMavoxFile(std::string const filename, Octree*& tree){
 		rng.seed(1234);
 		perlin_noise::perlin_noise_3d perlin(rng);
 
-		float noise = perlin.noise(r*10,g*10,b*10);
+		float noise = perlin.noise(r*20,g*20,b*20);
 		noise = (0.5 / (3.0 * std::sqrt(perlin.variance()))) * noise + 0.5;
 
 		DataPoint point = DataPoint(1,vec3(noise,noise,noise),vec3(nx,ny,nz));
