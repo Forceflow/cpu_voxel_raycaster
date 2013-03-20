@@ -24,9 +24,9 @@ void BaseOctreeRenderer::Render(const RenderContext& rc, const Octree const* tre
 			while((!t.isTerminated())){
 				if(t.getCurrentNode()->isLeaf()){
 					if(t.getCurrentNode()->hasData()){
-						texture_array[index] = (unsigned char) int(tree->leafdata[t.getCurrentNode()->data].color[0] * 255.0f);
-						texture_array[index+1] = (unsigned char) int(tree->leafdata[t.getCurrentNode()->data].color[1] * 255.0f);
-						texture_array[index+2] = (unsigned char) int(tree->leafdata[t.getCurrentNode()->data].color[2] * 255.0f);
+						texture_array[index] = (unsigned char) int(tree->data[t.getCurrentNode()->data].color[0] * 255.0f);
+						texture_array[index+1] = (unsigned char) int(tree->data[t.getCurrentNode()->data].color[1] * 255.0f);
+						texture_array[index+2] = (unsigned char) int(tree->data[t.getCurrentNode()->data].color[2] * 255.0f);
 						texture_array[index+3] = (unsigned char) 1;
 						break;
 					}

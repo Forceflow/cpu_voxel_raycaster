@@ -26,10 +26,7 @@ void LevelRenderer::Render(const RenderContext& rc, const Octree const* tree, un
 			while((!t.isTerminated())){
 				if(t.stack.size() >= maxlevel){
 
-					DataPoint* data = tree->nonleafdata;
-					if(t.getCurrentNode()->isLeaf()){
-						data = tree->leafdata;
-					}
+					DataPoint* data = tree->data;
 
 					r=0.0f;
 					g=0.0f;

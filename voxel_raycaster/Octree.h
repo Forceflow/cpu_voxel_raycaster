@@ -17,13 +17,12 @@ public:
 	size_t gridlength;
 
 	// Octree stats
-	size_t n_leafnodes;
-	size_t n_nonleafnodes;
+	size_t n_nodes;
+	size_t n_data;
 
 	// The data
-	VoxelData const* data; // just here for reference: not really needed to know which data this tree covers
-	DataPoint* leafdata;
-	DataPoint* nonleafdata;
+	VoxelData const* data_; // just here for reference: not really needed to know which data this tree covers
+	DataPoint* data;
 
 	// The octree nodes
 	std::vector<Node> nodes;
@@ -41,7 +40,7 @@ public:
 
 // DEPRECATED
 inline Octree::Octree(VoxelData const* data, vec3 min, vec3 max, vec3 size, size_t gridlength)
-	: data(data),min(min), max(max), size(size), gridlength(gridlength){
+	: data_(data),min(min), max(max), size(size), gridlength(gridlength){
 		nodes.push_back(Node()); // push back NULL node
 }
 

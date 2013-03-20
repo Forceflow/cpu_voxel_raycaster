@@ -30,10 +30,7 @@ void TopLevelRenderer::Render(const RenderContext& rc, const Octree const* tree,
 			while((!t.isTerminated())){
 				if(t.stack.size() >= (y / step)){
 
-					DataPoint* data = tree->nonleafdata;
-					if(t.getCurrentNode()->isLeaf()){
-						data = tree->leafdata;
-					}
+					DataPoint* data = tree->data;
 
 					r=0.0f;
 					g=0.0f;

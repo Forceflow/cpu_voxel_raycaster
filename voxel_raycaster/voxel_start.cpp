@@ -7,10 +7,6 @@
 
 #include "RenderContext.h"
 #include "util.h"
-#include "binvox_tools.h"
-#include "avox_tools.h"
-#include "mavox_tools.h"
-#include "octree_generation.h"
 #include "DiffuseOctreeRenderer.h"
 #include "BaseOctreeRenderer.h"
 #include "WorkOctreeRenderer.h"
@@ -230,34 +226,16 @@ void printInvalid(){
 	std::cout << "For Example: voxelraycaster.exe -f /home/jeroen/bunny256.avox" << endl;
 }
 
-void parseParameters(int argc, char **argv, string& datafile, string& moctreefile, FileFormat& inputformat, unsigned int& rendersize, bool& force_cache_regen){
+void parseParameters(int argc, char **argv, string& file, FileFormat &inputformat, unsigned int& rendersize){
 	if(argc < 2){ printInvalid(); exit(0);}
 	for (int i = 1; i < argc; i++) {
 		if (string(argv[i]) == "-f") {
-			datafile = argv[i + 1]; 
-			size_t check_binvox = datafile.find(".binvox");
-			size_t check_avox = datafile.find(".avox");
-			size_t check_mavox = datafile.find(".mavox");
-			if(check_binvox != string::npos){
-				inputformat = BINVOX;
-				moctreefile = datafile.substr(0,check_binvox).append(".moctree");
-			} else if(check_avox != string::npos){
-				inputformat = AVOX;
-				moctreefile = datafile.substr(0,check_avox).append(".moctree");
-			} else if(check_mavox != string::npos){
-				inputformat = MAVOX;
-				moctreefile = datafile.substr(0,check_mavox).append(".moctree");
+			file = argv[i + 1]; 
+			size_t check_octree = file.find(".octree");
+			if(check_octree != string::npos){
+				inputformat = OCTREE;
 			} else{ 
-				cout << "Data filename does not end in .binvox/.avox/.mavox - I only support those file formats." << endl; 
-				printInvalid();
-				exit(0);
-			}
-			i++;
-		} else if (string(argv[i]) == "-m") {
-			moctreefile = argv[i + 1]; 
-			size_t check_moctree = moctreefile.find(".moctree");
-			if(check_moctree == string::npos){ 
-				cout << "Filename does not end in .moctree - I only support .moctree files." << endl; 
+				cout << "Data filename does not end in .octree - I only support that file format" << endl; 
 				printInvalid();
 				exit(0);
 			}
@@ -265,8 +243,6 @@ void parseParameters(int argc, char **argv, string& datafile, string& moctreefil
 		} else if (string(argv[i]) == "-s") {
 			rendersize = atoi(argv[i + 1]); 
 			i++;
-		} else if (string(argv[i]) == "-r") {
-			force_cache_regen = true; 
 		} else {printInvalid(); exit(0);}
 	}
 }
@@ -311,12 +287,10 @@ int main(int argc, char **argv) {
 	printControls();
 
 	// Input argument validation
-	string moctreefile = "";
 	string datafile = "";
-	bool force_cache_regen = false;
 	unsigned int rendersize = 640;
 	FileFormat inputformat;
-	parseParameters(argc,argv,datafile,moctreefile,inputformat,rendersize,force_cache_regen);
+	parseParameters(argc,argv,datafile,inputformat,rendersize);
 
 	// Initialize render system
 	unsigned int render_x = rendersize;
@@ -324,31 +298,8 @@ int main(int argc, char **argv) {
 	initRenderSystem(render_x,render_y);
 	loadRenderers();
 
-	// Get morton array (describing the octree)
-	bool* morton_array; size_t gridlength; VoxelData mydata;
-	if(inputformat == BINVOX){
-		readMoctreeFile(moctreefile,gridlength,&morton_array);
-		if(!readBinvoxFile(datafile,gridlength,mydata)){
-			cout << "Error reading binvox file..." << endl; exit(0);
-		}
-		generateOctree(gridlength,&mydata,morton_array,&octree);
-	}
-	else if(inputformat == AVOX){
-		readMoctreeFile(moctreefile,gridlength,&morton_array);
-		if(!readAvoxFile(datafile,gridlength,mydata)){
-			cout << "Error reading avox file..." << endl; exit(0);
-		}
-		generateOctree(gridlength,&mydata,morton_array,&octree);
-	}
-	else if(inputformat == MAVOX){
-		if(checkForOctreeCache(datafile) && !force_cache_regen){
+	if(inputformat == OCTREE){
 			readOctree(datafile,octree); // read the octree from cache
-		} else {
-			if(!readMavoxFile(datafile,octree)){ // build the octree
-				cout << "Error reading mavox file..." << endl; exit(0);
-			}
-			writeOctree(datafile,octree); // write it to cache
-		}
 	}
 	
 	octree->min = vec3(0,0,-2);

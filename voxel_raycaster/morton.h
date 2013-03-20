@@ -5,8 +5,6 @@
 #include <fstream>
 #include "math.h"
 #include <windows.h>
-#include "DataPoint.h"
-#include "binvox_tools.h"
 #include <cstdint>
 #include <limits.h>
 #include <vector>

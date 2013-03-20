@@ -16,7 +16,7 @@
 #include <time.h>
 #include <TriMesh.h>
 
-enum FileFormat{BINVOX,AVOX,MAVOX};
+enum FileFormat{OCTREE};
 typedef Vec<3,int> RGBColor;
 
 std::string getTimeString();

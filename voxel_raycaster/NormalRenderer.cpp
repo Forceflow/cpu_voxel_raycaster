@@ -27,7 +27,7 @@ void NormalRenderer::Render(const RenderContext& rc, const Octree const* tree, u
 				if(t.getCurrentNode()->isLeaf()){
 					if(t.getCurrentNode()->hasData()){
 						
-						vec3 normal = tree->leafdata[t.getCurrentNode()->data].normal;
+						vec3 normal = tree->data[t.getCurrentNode()->data].normal;
 						normal = normalize(normal);
 						float r = 255 * ((normal[0]+1.0f)/2.0f);
 						float g = 255 * ((normal[1]+1.0f)/2.0f);
