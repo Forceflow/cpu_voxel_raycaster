@@ -5,7 +5,7 @@
 #include <limits>
 #include <windows.h>
 
-#include "RenderContext.h"
+#include "RenderContext.h" 
 #include "util.h"
 #include "DiffuseOctreeRenderer.h"
 #include "BaseOctreeRenderer.h"
