@@ -13,6 +13,8 @@
 #include "string.h"
 #include "util.h"
 
+using namespace trimesh;
+
 class Camera {
 public:
 	vec3 e_,g_,t_,u_,v_,w_;

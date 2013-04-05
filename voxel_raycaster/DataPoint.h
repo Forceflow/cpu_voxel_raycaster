@@ -11,6 +11,8 @@
 #include "array_3d.h"
 #include "util.h"
 
+using namespace trimesh;
+
 class DataPoint {
 public:
 	float opacity;

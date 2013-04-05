@@ -115,13 +115,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\libs\anttweakbar\include;C:\libs\freeglut\include;C:\libs\trimesh2\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\libs\anttweakbar\include;C:\libs\freeglut\include;C:\libs\trimesh2_new\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>C:\libs\anttweakbar\lib;C:\libs\freeglut\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\libs\anttweakbar\include;C:\libs\freeglut\include;C:\libs\trimesh2\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\libs\anttweakbar\include;C:\libs\freeglut\include;C:\libs\trimesh2_new\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\libs\anttweakbar\lib;C:\libs\freeglut\lib\x64;C:\libs\trimesh2\lib.Win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

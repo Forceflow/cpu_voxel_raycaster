@@ -3,6 +3,8 @@
 
 #include "util.h"
 
+using namespace trimesh;
+
 class Light {
 public:
 

@@ -13,6 +13,8 @@
 #include "Ray.h"
 #include "Light.h"
 
+using namespace trimesh;
+
 class RenderContext {
 public:
 	// class attributes

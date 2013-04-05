@@ -14,6 +14,8 @@
 #include "util.h"
 #include "string.h"
 
+using namespace trimesh;
+
 class AABox {
 public:
 	//variables

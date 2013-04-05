@@ -12,6 +12,8 @@
 #include <string>
 #include "util.h"
 
+using namespace trimesh;
+
 class Ray {
 public:
 

@@ -17,7 +17,7 @@
 #include <TriMesh.h>
 
 enum FileFormat{OCTREE};
-typedef Vec<3,int> RGBColor;
+//typedef Vec<3,int> RGBColor;
 
 std::string getTimeString();
 void writePPM(int w, int h, unsigned char* array, std::string name);
