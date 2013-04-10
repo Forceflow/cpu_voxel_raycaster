@@ -272,7 +272,7 @@ void generateLightTWBars(TwBar* bar){
 void initRenderSystem(unsigned int render_x, unsigned int render_y){
 	camera = Camera(vec3(0,0,0),vec3(vec3(0,0,-1)),vec3(0,1,0));
 	float aspect_ratio = render_x/render_y;
-	frustrum = Frustrum(30,aspect_ratio,1,100);
+	frustrum = Frustrum(30,aspect_ratio,1,100); // THIS near and far SHOULD BE NEGATIVE
 	render_context = RenderContext(&camera,&frustrum,render_x,render_y);
 	Light mylight = Light(vec3(-4,0,-3.0f), vec3(0.8,0.0,0.0));
 	Light mylight2 = Light(vec3(4,0,-3.0f), vec3(0.0,0.0,0.8));
