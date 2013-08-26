@@ -1,48 +1,35 @@
-#include "octree_io.h"
+#include "octree_build.h"
 
 using namespace std;
 
-bool checkForOctreeCache(std::string basefilename){
+void readOctreeData(OctreeInfo const &octree_info, DataPoint** data){
+	string filename = octree_info.base_filename+string(".octreedata");
+	FILE* file = fopen(filename.c_str(), "rb");
 
-	size_t splitpoint = basefilename.find_last_of(".");
-	stringstream octreecachefile;
-	octreecachefile << basefilename.substr(0,splitpoint) << ".octreecache";
-
-	cout << "Checking for octree cache ... "; 
-
-	ifstream checkfile(octreecachefile.str().c_str());
-	if(checkfile.good()){
-		checkfile.close();
-		cout << "Exists!" << endl;
-		return true;
-	}
-	checkfile.close();
-	cout << "Not found." << endl;
-	return false;
-}
-
-int readOctreeData(Octree* octree, std::string filename){
-	ifstream datafile;
-	datafile.open(filename.c_str(), ios::in | ios::binary);
-
-	octree->data = new DataPoint[octree->n_data];
+	*data = new DataPoint[octree_info.n_data];
 
 	// read data
-	for(size_t i = 0; i< octree->n_data; i++){
-		DataPoint d = DataPoint();
-		datafile.read(reinterpret_cast<char*> (&d.opacity), sizeof(float));
-		datafile.read(reinterpret_cast<char*> (&d.color[0]), sizeof(float));
-		datafile.read(reinterpret_cast<char*> (&d.color[1]), sizeof(float));
-		datafile.read(reinterpret_cast<char*> (&d.color[2]), sizeof(float));
-		datafile.read(reinterpret_cast<char*> (&d.normal[0]), sizeof(float));
-		datafile.read(reinterpret_cast<char*> (&d.normal[1]), sizeof(float));
-		datafile.read(reinterpret_cast<char*> (&d.normal[2]), sizeof(float));
-		// Store datapoint
-		octree->data[i] = d;
+	for(size_t i = 0; i< octree_info.n_data; i++){
+		(*data)[i] = DataPoint();
+		readDataPoint(file,(*data)[i]);
 	}
-	datafile.close();
-	return 1;
+	fclose(file);
 }
+
+void readOctreeNodes(OctreeInfo const &octree_info, std::vector<Node> &nodes){
+	string filename = octree_info.base_filename+string(".octreenodes");
+	FILE* file = fopen(filename.c_str(), "rb");
+
+	nodes.reserve(octree_info.n_nodes);
+
+	for(size_t i = 0; i< octree_info.n_nodes; i++){
+		Node n = Node();
+		readNode(file,n);
+		nodes.push_back(n);
+	}
+	fclose(file);
+}
+
 
 int readOctreeNodes(Octree* octree, std::string filename){
 	ifstream nodefile;
@@ -105,13 +92,18 @@ int readOctree(std::string basefilename, Octree*& octree){
 	nodefile << basefilename.substr(0,splitpoint) << ".octreenodes";
 	datafile << basefilename.substr(0,splitpoint) << ".octreedata";
 
+	OctreeInfo info;
+	parseOctreeHeader(basefilename, info);
+
 	// start reading octree
 	octree = new Octree(); // create empty octree
+	octree->gridlength = info.gridlength;
+	octree->n_data = info.n_data;
+	octree->n_nodes = info.n_nodes;
 	
 	// read header and print statistics
-	readOctreeHeader(octree,octreecachefile.str());
-	readOctreeNodes(octree,nodefile.str());
-	readOctreeData(octree, datafile.str());
+	readOctreeNodes(info, octree->nodes);
+	readOctreeData(info, &(octree->data));
 
 	return 1;
 }

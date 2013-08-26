@@ -16,7 +16,7 @@
 #include "LevelRenderer.h"
 #include "TopLevelRenderer.h"
 #include "RendererManager.h"
-#include "octree_io.h"
+#include "octree_build.h"
 #include <AntTweakBar.h>
 
 using namespace std;

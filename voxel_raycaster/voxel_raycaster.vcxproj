@@ -37,6 +37,7 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="NormalRenderer.h" />
     <ClInclude Include="Octree.h" />
+    <ClInclude Include="octree_build.h" />
     <ClInclude Include="octree_io.h" />
     <ClInclude Include="perlin_noise.hpp" />
     <ClInclude Include="Ray.h" />
@@ -58,7 +59,7 @@
     <ClCompile Include="LevelRenderer.cpp" />
     <ClCompile Include="morton.cpp" />
     <ClCompile Include="NormalRenderer.cpp" />
-    <ClCompile Include="octree_io.cpp" />
+    <ClCompile Include="octree_build.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="TopLevelRenderer.cpp" />

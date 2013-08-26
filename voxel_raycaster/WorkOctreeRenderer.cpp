@@ -31,7 +31,7 @@ void WorkOctreeRenderer::Render(const RenderContext& rc, const Octree const* tre
 				}
 				t.step();
 			}
-			texture_array[index] = (unsigned char) int((float(t.stepcount)/(size*1.42))*255.0);
+			texture_array[index] = (unsigned char) int((float(t.stepcount)/(log2(size)))*255.0);
 			texture_array[index+3] = (unsigned char) 1;
 		}
 	}

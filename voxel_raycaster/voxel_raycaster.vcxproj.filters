@@ -120,9 +120,6 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\render</Filter>
     </ClInclude>
-    <ClInclude Include="octree_io.h">
-      <Filter>Header Files\io</Filter>
-    </ClInclude>
     <ClInclude Include="RendererManager.h">
       <Filter>Header Files\render</Filter>
     </ClInclude>
@@ -134,6 +131,12 @@
     </ClInclude>
     <ClInclude Include="TopLevelRenderer.h">
       <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="octree_build.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="octree_io.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +188,7 @@
     <ClCompile Include="morton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="octree_io.cpp">
+    <ClCompile Include="octree_build.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
