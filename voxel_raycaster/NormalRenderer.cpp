@@ -24,20 +24,21 @@ void NormalRenderer::Render(const RenderContext& rc, const Octree const* tree, u
 			index = partindex + x*4; // index in char array computation (part 2)
 			t = TreeTraverser(tree,rc.getRayForPixel(x,y));
 			while((!t.isTerminated())){
-				if(t.getCurrentNode()->isLeaf()){
-					if(t.getCurrentNode()->hasData()){
-						
-						vec3 normal = tree->data[t.getCurrentNode()->data].normal;
-						normal = normalize(normal);
-						float r = 255 * ((normal[0]+1.0f)/2.0f);
-						float g = 255 * ((normal[1]+1.0f)/2.0f);
-						float b = 255 * ((normal[2]+1.0f)/2.0f);
+				if(t.stack.back().t0.max()> 0.0f){
+					if(t.getCurrentNode()->isLeaf()){
+						if(t.getCurrentNode()->hasData()){
+							vec3 normal = tree->data[t.getCurrentNode()->data].normal;
+							normal = normalize(normal);
+							float r = 255 * ((normal[0]+1.0f)/2.0f);
+							float g = 255 * ((normal[1]+1.0f)/2.0f);
+							float b = 255 * ((normal[2]+1.0f)/2.0f);
 
-						texture_array[index] = (unsigned char) r;
-						texture_array[index+1] = (unsigned char) g;
-						texture_array[index+2] = (unsigned char) b;
-						texture_array[index+3] = (unsigned char) 1;
-						break;
+							texture_array[index] = (unsigned char) r;
+							texture_array[index+1] = (unsigned char) g;
+							texture_array[index+2] = (unsigned char) b;
+							texture_array[index+3] = (unsigned char) 1;
+							break;
+						}
 					}
 				}
 				t.step();

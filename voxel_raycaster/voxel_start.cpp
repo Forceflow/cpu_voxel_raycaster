@@ -171,6 +171,12 @@ void keyboardfunc(unsigned char key, int x, int y)
 		case 'd':
 			camera.g_ = camera.g_ + vec3(0,-0.2,0);
 			break;
+		case 'r':
+			camera.g_ = camera.g_ + vec3(0,0,-0.2);
+			break;
+		case 'f':
+			camera.g_ = camera.g_ + vec3(0,0,-0.2);
+			break;
 		case 'n':
 			lightselector = (lightselector+1) % (render_context.lights.size());
 			cout << "light selector:" << lightselector << endl;
@@ -302,8 +308,8 @@ int main(int argc, char **argv) {
 			readOctree(datafile,octree); // read the octree from cache
 	}
 	
-	octree->min = vec3(0,0,-2);
-	octree->max = vec3(2,2,-4);
+	octree->min = vec3(0,0,2);
+	octree->max = vec3(2,2,0);
 	octree->size = vec3(2,2,2);
 
 	cout << "Starting rendering ..." << endl;

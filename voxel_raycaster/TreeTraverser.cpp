@@ -114,17 +114,17 @@ void TreeTraverser::initTraversal(){
 	original_ray = ray;
 
 	// fixes for rays with negative direction
-	if(ray.direction[0] < 0){
+	if(ray.direction[0] < 0.0f){
 		ray.origin[0] = octree->size[0] - ray.origin[0];
 		ray.direction[0] = - ray.direction[0];
 		a |= 4 ; //bitwise OR (latest bits are XYZ)
 	}
-	if(ray.direction[1] < 0){
+	if(ray.direction[1] < 0.0f){
 		ray.origin[1] = octree->size[1] - ray.origin[1];
 		ray.direction[1] = - ray.direction[1];
 		a |= 2 ; 
 	}
-	if(ray.direction[2] > 0){
+	if(ray.direction[2] > 0.0f){
 		ray.origin[2] = octree->size[2] - ray.origin[2];
 		ray.direction[2] = - ray.direction[2];
 		a |= 1 ; 
