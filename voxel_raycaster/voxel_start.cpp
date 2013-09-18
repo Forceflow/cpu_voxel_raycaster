@@ -130,16 +130,16 @@ void keyboardfunc(unsigned char key, int x, int y)
 	TwEventKeyboardGLUT(key,x,y);
 	switch (key) {
 		case '0':
-			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0,-0.2,0);
+			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0,-0.1,0);
 			break;
 		case '2':
-			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0,0.2,0);
+			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0,0.1,0);
 			break;
 		case '1':
-			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(-0.2,0,0);
+			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(-0.1,0,0);
 			break;
 		case '3':
-			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0.2,0,0);
+			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0.1,0,0);
 			break;
 		case '9':
 			camera.e_ = camera.e_ + vec3(0,0,-0.2);
@@ -280,7 +280,8 @@ void initRenderSystem(unsigned int render_x, unsigned int render_y){
 	float aspect_ratio = render_x/render_y;
 	frustrum = Frustrum(30,aspect_ratio,1,100); // THIS near and far SHOULD BE NEGATIVE
 	render_context = RenderContext(&camera,&frustrum,render_x,render_y);
-	Light mylight = Light(vec3(-4,0,-3.0f), vec3(0.8,0.0,0.0));
+	Light mylight = Light(vec3(0,0,0), vec3(1.0,1.0,1.0));
+	mylight.SHININESS = 25.0f;
 	Light mylight2 = Light(vec3(4,0,-3.0f), vec3(0.0,0.0,0.8));
 	Light mylight3 = Light(vec3(0,0,-3.0f), vec3(0.0,0.8,0.0));
 	render_context.lights.push_back(mylight);
