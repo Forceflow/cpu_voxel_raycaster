@@ -3,10 +3,13 @@
 
 #include <stdio.h>
 #include <fstream>
+//#include <file_tools.h>
 #include "Node.h"
 #include "DataPoint.h"
 
 using namespace std;
+
+#define DATAPOINT_SIZE 7
 
 // File containing all the octree IO methods
 
@@ -21,13 +24,21 @@ struct OctreeInfo {
 	OctreeInfo() : version(1), base_filename(string("")), gridlength(1024), n_nodes(0), n_data(0) {}
 	OctreeInfo(int version, string base_filename, size_t gridlength, size_t n_nodes, size_t n_data) : version(version), base_filename(base_filename), gridlength(gridlength), n_nodes(n_nodes), n_data(n_data) {} 
 
-	void print(){
+	void print() const{
 		cout << "  version: " << version << endl;
 		cout << "  base_filename: " << base_filename << endl;
 		cout << "  grid length: " << gridlength << endl;
 		cout << "  n_nodes: " << n_nodes << endl;
 		cout << "  n_data: " << n_data << endl;
 	}
+
+	// check if all files required by Tri exist
+	//bool filesExist() const{
+	//	string header = base_filename + string(".octree");
+	//	string nodes = base_filename + string(".octreenodes");
+	//	string data = base_filename + string(".octreedata");
+	//	return (file_exists(header) && file_exists(nodes) && file_exists(data));
+	//}
 };
 
 size_t writeDataPoint(FILE* data_out, const DataPoint &d, size_t &b_data_pos);
@@ -40,34 +51,34 @@ int parseOctreeHeader(const std::string &filename, OctreeInfo &i);
 
 // Write a data point to file
 inline size_t writeDataPoint(FILE* data_out, const DataPoint &d, size_t &b_data_pos){
-	fwrite(& d.opacity, sizeof(float), 1, data_out);
-	fwrite(& d.color[0], sizeof(float), 3, data_out);
-	fwrite(& d.normal[0], sizeof(float), 3, data_out);
+	fwrite(& d.opacity, sizeof(float), DATAPOINT_SIZE, data_out);
+	//fwrite(& d.color[0], sizeof(float), 3, data_out);
+	//fwrite(& d.normal[0], sizeof(float), 3, data_out);
 	b_data_pos++;
 	return b_data_pos-1;
 }
 
 // Read a data point from a file
 inline void readDataPoint(FILE* f, DataPoint &d){
-	fread(& d.opacity, sizeof(float), 1, f);
-	fread(& d.color[0], sizeof(float), 3, f);
-	fread(& d.normal[0], sizeof(float), 3, f);
+	fread(& d.opacity, sizeof(float), DATAPOINT_SIZE, f);
+	//fread(& d.color[0], sizeof(float), 3, f);
+	//fread(& d.normal[0], sizeof(float), 3, f);
 }
 
 // Write an octree node to file
 inline size_t writeNode(FILE* node_out, const Node &n, size_t &b_node_pos){
-	fwrite(& n.children_base, sizeof(size_t), 1, node_out);
-	fwrite(& n.children_offset[0], sizeof(char), 8, node_out);
-	fwrite(& n.data, sizeof(size_t), 1, node_out);
+	fwrite(& n.data, sizeof(size_t), 3, node_out);
+	//fwrite(& n.children_base, sizeof(size_t), 1, node_out);
+	//fwrite(& n.children_offset[0], sizeof(char), 8, node_out);
 	b_node_pos++;
 	return b_node_pos-1;
 }
 
 // Read a Node from a file
 inline void readNode(FILE* f, Node &n){
-	fread(& n.children_base, sizeof(size_t), 1, f);
-	fread(& n.children_offset[0], sizeof(char), 8, f);
-	fread(& n.data, sizeof(size_t), 1, f);
+	fread(& n.data, sizeof(size_t), 3, f);
+	//fread(& n.children_base, sizeof(size_t), 1, f);
+	//fread(& n.children_offset[0], sizeof(char), 8, f);
 }
 
 // Write an octree header to a file
@@ -101,7 +112,7 @@ inline int parseOctreeHeader(const std::string &filename, OctreeInfo &i){
 		else if (line.compare("n_nodes") == 0) {headerfile >> i.n_nodes;}
 		else if (line.compare("n_data") == 0) {headerfile >> i.n_data;}
 		else { cout << "  unrecognized keyword [" << line << "], skipping" << endl;
-			char c; do { c = headerfile.get(); } while(headerfile.good() && (c != '\n'));
+		char c; do { c = headerfile.get(); } while(headerfile.good() && (c != '\n'));
 		}
 	}
 
