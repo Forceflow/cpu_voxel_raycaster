@@ -186,12 +186,12 @@ void keyboardfunc(unsigned char key, int x, int y)
 			break;
 		case 'k':
 			{LevelRenderer* lr = dynamic_cast<LevelRenderer*>(rmanager.getRenderer("level"));
-			lr->maxlevel = (lr->maxlevel -1) % (log2(octree->gridlength)+2);
+			lr->maxlevel = (lr->maxlevel -1) % (int) (log2(octree->gridlength)+2);
 			cout << "Max level for Level renderer: " << lr->maxlevel << endl;}
 			break;
 		case 'l':
 			{LevelRenderer* lr = dynamic_cast<LevelRenderer*>(rmanager.getRenderer("level"));
-			lr->maxlevel = (lr->maxlevel +1) % (log2(octree->gridlength)+2);
+			lr->maxlevel = (lr->maxlevel + 1) % (int) (log2(octree->gridlength) + 2);
 			cout << "Max level for Level renderer: " << lr->maxlevel << endl;}
 			break;
 		case 'i':
