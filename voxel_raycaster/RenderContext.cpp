@@ -15,6 +15,8 @@ RenderContext::RenderContext(Camera const* c, Frustrum const* f, int resolution_
 }
 
 // Get the screenpoint s of the pixel on the frustrum (in world coordinates)
+// This is what a projection matrix normally does
+
 vec3 RenderContext::getPixelCoordinate(int i, int j) const{
 	// compute u,v,w
 	float u_s = frustrum->l + (frustrum->r - frustrum->l)*((i+0.5f)/n_x);

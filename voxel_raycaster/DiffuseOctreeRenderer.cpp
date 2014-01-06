@@ -24,7 +24,7 @@ void DiffuseOctreeRenderer::Render(const RenderContext& rc, const Octree const* 
 			index = partindex + x*4; // index in char array computation (part 2)
 			t = TreeTraverser(tree,rc.getRayForPixel(x,y)); // DO A BASIC BOUNDING BOX TEST FOR THE TEST FIRST
 			while((!t.isTerminated())){
-				if(t.getCurrentNode()->isLeaf() && t.getCurrentNode()->hasData() && t.stack.back().t0.max() >0){
+				if(t.getCurrentNode()->isLeaf() && t.getCurrentNode()->hasData()) {//&& t.stack.back().t0.max() >0){
 					
 					r=0.0f;
 					g=0.0f;

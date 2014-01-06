@@ -37,6 +37,7 @@ inline Camera::Camera(vec3 e, vec3 g, vec3 t) : e_(e), g_(g), t_(t) {
 }
 
 // Private method to compute camera basis in UVW coordinates
+// This is like constructing the view matrix
 inline void Camera::computeUVW(vec3 e, vec3 g, vec3 t){
 	vec3 w = normalize(g) * -1.0f;
 	vec3 u = normalize((vec3) (t CROSS w));
