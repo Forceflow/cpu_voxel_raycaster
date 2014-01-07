@@ -138,6 +138,9 @@
     <ClInclude Include="octree_io.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VoxelData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="voxel_start.cpp">

@@ -47,6 +47,7 @@
     <ClInclude Include="TopLevelRenderer.h" />
     <ClInclude Include="TreeTraverser.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="VoxelData.h" />
     <ClInclude Include="VoxelGenerator.h" />
     <ClInclude Include="WorkOctreeRenderer.h" />
   </ItemGroup>

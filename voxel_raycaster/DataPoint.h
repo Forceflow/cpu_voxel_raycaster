@@ -25,8 +25,6 @@ public:
 	bool isEmpty();
 };
 
-typedef al::array::array_3d<DataPoint> VoxelData;
-
 inline DataPoint::DataPoint() : opacity(0.0f), color(vec3(0,0,0)), normal(vec3(0.0f,0.0f,0.0f)){
 }
 

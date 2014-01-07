@@ -21,13 +21,11 @@ public:
 	size_t n_data;
 
 	// The data
-	VoxelData const* data_; // just here for reference: not really needed to know which data this tree covers
-	DataPoint* data;
+	VoxelData* data;
 
 	// The octree nodes
 	std::vector<Node> nodes;
 
-	Octree(VoxelData const* data, vec3 min, vec3 max, vec3 size, size_t gridlength);
 	Octree(vec3 min, vec3 max, vec3 size, size_t gridlength);
 	Octree();
 	size_t storeNode(Node n);
@@ -37,12 +35,6 @@ public:
 	Node* getRootNode();
 	~Octree(void);
 };
-
-// DEPRECATED
-inline Octree::Octree(VoxelData const* data, vec3 min, vec3 max, vec3 size, size_t gridlength)
-	: data_(data),min(min), max(max), size(size), gridlength(gridlength){
-		nodes.push_back(Node()); // push back NULL node
-}
 
 inline Octree::Octree(vec3 min, vec3 max, vec3 size, size_t gridlength)
 	: min(min), max(max), size(size), gridlength(gridlength){

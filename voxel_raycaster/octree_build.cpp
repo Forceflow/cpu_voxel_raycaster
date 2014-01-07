@@ -2,16 +2,16 @@
 
 using namespace std;
 
-void readOctreeData(OctreeInfo const &octree_info, DataPoint** data){
+void readOctreeData(OctreeInfo const &octree_info, VoxelData** data){
 	string filename = octree_info.base_filename+string(".octreedata");
 	FILE* file = fopen(filename.c_str(), "rb");
 
-	*data = new DataPoint[octree_info.n_data];
+	*data = new VoxelData[octree_info.n_data];
 
 	// read data
 	for(size_t i = 0; i< octree_info.n_data; i++){
-		(*data)[i] = DataPoint();
-		readDataPoint(file,(*data)[i]);
+		(*data)[i] = VoxelData();
+		readVoxelData(file,(*data)[i]);
 	}
 	fclose(file);
 }
