@@ -167,9 +167,6 @@
     <ClCompile Include="TreeTraverser.cpp">
       <Filter>Source Files\tree</Filter>
     </ClCompile>
-    <ClCompile Include="RenderContext.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
     <ClCompile Include="Ray.cpp">
       <Filter>Source Files\view</Filter>
     </ClCompile>

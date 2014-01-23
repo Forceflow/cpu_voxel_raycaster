@@ -79,7 +79,7 @@ void display(void)
 {
 	Timer t = Timer();
 	rendername = rmanager.getCurrentRenderer()->name;
-	camera.computeUVW(camera.e_,camera.g_,camera.t_);
+	camera.computeUVW();
 
 	memset(data,0,render_context.n_x*render_context.n_y*4);
 	rmanager.getCurrentRenderer()->Render(render_context,octree,data);
@@ -202,7 +202,7 @@ void keyboardfunc(unsigned char key, int x, int y)
 		default:
 			glutPostRedisplay();
 	}
-	camera.computeUVW(camera.e_,camera.g_,camera.t_);
+	camera.computeUVW();
 	glutPostRedisplay();
 }
 

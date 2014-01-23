@@ -62,7 +62,6 @@
     <ClCompile Include="NormalRenderer.cpp" />
     <ClCompile Include="octree_build.cpp" />
     <ClCompile Include="Ray.cpp" />
-    <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="TopLevelRenderer.cpp" />
     <ClCompile Include="TreeTraverser.cpp" />
     <ClCompile Include="util.cpp" />
