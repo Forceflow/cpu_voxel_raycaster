@@ -33,7 +33,7 @@ int current_r = 0;
 int lightselector = 0;
 
 Octree* octree = NULL;
-unsigned char* data;
+unsigned char* renderdata;
 
 // OpenGL
 GLuint texid;
@@ -60,7 +60,7 @@ void drawFullsizeQuad()
 
 void generateTexture(){
    glBindTexture(GL_TEXTURE_2D, texid);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,render_context.n_x,render_context.n_y,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,render_context.n_x,render_context.n_y,0,GL_RGBA,GL_UNSIGNED_BYTE, renderdata);
    glEnable(GL_TEXTURE_2D);
 }
 
@@ -81,8 +81,8 @@ void display(void)
 	rendername = rmanager.getCurrentRenderer()->name;
 	camera.computeUVW();
 
-	memset(data,0,render_context.n_x*render_context.n_y*4);
-	rmanager.getCurrentRenderer()->Render(render_context,octree,data);
+	memset(renderdata,0,render_context.n_x*render_context.n_y*4);
+	rmanager.getCurrentRenderer()->Render(render_context,octree, renderdata);
 
 	generateTexture();
 	drawFullsizeQuad();
@@ -196,7 +196,7 @@ void keyboardfunc(unsigned char key, int x, int y)
 			break;
 		case 'i':
 			{string filename = "image"+getTimeString()+"";
-			writePPM(render_context.n_x,render_context.n_y, data, filename);
+			writePPM(render_context.n_x,render_context.n_y, renderdata, filename);
 			std::cout << "Image file written: " << filename << ".ppm" << std::endl;}
 			break;
 		default:
@@ -316,7 +316,7 @@ int main(int argc, char **argv) {
 	cout << "Starting rendering ..." << endl;
 
 	const int rgba_amount = render_x*render_y*4;
-	data = new unsigned char[rgba_amount]; // put this on heap, it's too big, captain
+	renderdata = new unsigned char[rgba_amount]; // put this on heap, it's too big, captain
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
