@@ -20,8 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\AABox.h" />
-    <ClInclude Include="..\src\array_1d.h" />
-    <ClInclude Include="..\src\array_3d.h" />
     <ClInclude Include="..\src\BaseOctreeRenderer.h" />
     <ClInclude Include="..\src\Camera.h" />
     <ClInclude Include="..\src\DataPoint.h" />
