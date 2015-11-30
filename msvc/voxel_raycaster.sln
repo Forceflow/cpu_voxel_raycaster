@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "voxel_raycaster", "voxel_raycaster\voxel_raycaster.vcxproj", "{62014F3C-605A-485C-B2A9-73728782F783}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "voxel_raycaster", "voxel_raycaster.vcxproj", "{62014F3C-605A-485C-B2A9-73728782F783}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution

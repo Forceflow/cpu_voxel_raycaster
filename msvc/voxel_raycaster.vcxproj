@@ -19,58 +19,58 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AABox.h" />
-    <ClInclude Include="array_1d.h" />
-    <ClInclude Include="array_3d.h" />
-    <ClInclude Include="BaseOctreeRenderer.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="DataPoint.h" />
-    <ClInclude Include="DebugRenderer.h" />
-    <ClInclude Include="DepthRenderer.h" />
-    <ClInclude Include="DiffuseOctreeRenderer.h" />
-    <ClInclude Include="Frustrum.h" />
-    <ClInclude Include="intersection.h" />
-    <ClInclude Include="LevelRenderer.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="misc_math.h" />
-    <ClInclude Include="morton.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="NormalRenderer.h" />
-    <ClInclude Include="Octree.h" />
-    <ClInclude Include="octree_build.h" />
-    <ClInclude Include="octree_io.h" />
-    <ClInclude Include="perlin_noise.hpp" />
-    <ClInclude Include="Ray.h" />
-    <ClInclude Include="RenderContext.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="RendererManager.h" />
-    <ClInclude Include="TopLevelRenderer.h" />
-    <ClInclude Include="TreeTraverser.h" />
-    <ClInclude Include="util.h" />
-    <ClInclude Include="VoxelData.h" />
-    <ClInclude Include="VoxelGenerator.h" />
-    <ClInclude Include="WorkOctreeRenderer.h" />
+    <ClInclude Include="..\src\AABox.h" />
+    <ClInclude Include="..\src\array_1d.h" />
+    <ClInclude Include="..\src\array_3d.h" />
+    <ClInclude Include="..\src\BaseOctreeRenderer.h" />
+    <ClInclude Include="..\src\Camera.h" />
+    <ClInclude Include="..\src\DataPoint.h" />
+    <ClInclude Include="..\src\DebugRenderer.h" />
+    <ClInclude Include="..\src\DepthRenderer.h" />
+    <ClInclude Include="..\src\DiffuseOctreeRenderer.h" />
+    <ClInclude Include="..\src\Frustrum.h" />
+    <ClInclude Include="..\src\intersection.h" />
+    <ClInclude Include="..\src\LevelRenderer.h" />
+    <ClInclude Include="..\src\Light.h" />
+    <ClInclude Include="..\src\misc_math.h" />
+    <ClInclude Include="..\src\morton.h" />
+    <ClInclude Include="..\src\Node.h" />
+    <ClInclude Include="..\src\NormalRenderer.h" />
+    <ClInclude Include="..\src\Octree.h" />
+    <ClInclude Include="..\src\octree_build.h" />
+    <ClInclude Include="..\src\octree_io.h" />
+    <ClInclude Include="..\src\perlin_noise.hpp" />
+    <ClInclude Include="..\src\Ray.h" />
+    <ClInclude Include="..\src\RenderContext.h" />
+    <ClInclude Include="..\src\Renderer.h" />
+    <ClInclude Include="..\src\RendererManager.h" />
+    <ClInclude Include="..\src\TopLevelRenderer.h" />
+    <ClInclude Include="..\src\TreeTraverser.h" />
+    <ClInclude Include="..\src\util.h" />
+    <ClInclude Include="..\src\VoxelData.h" />
+    <ClInclude Include="..\src\VoxelGenerator.h" />
+    <ClInclude Include="..\src\WorkOctreeRenderer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseOctreeRenderer.cpp" />
-    <ClCompile Include="DebugRenderer.cpp" />
-    <ClCompile Include="DepthRenderer.cpp" />
-    <ClCompile Include="DiffuseOctreeRenderer.cpp" />
-    <ClCompile Include="intersection.cpp" />
-    <ClCompile Include="LevelRenderer.cpp" />
-    <ClCompile Include="morton.cpp" />
-    <ClCompile Include="NormalRenderer.cpp" />
-    <ClCompile Include="octree_build.cpp" />
-    <ClCompile Include="Ray.cpp" />
-    <ClCompile Include="TopLevelRenderer.cpp" />
-    <ClCompile Include="TreeTraverser.cpp" />
-    <ClCompile Include="util.cpp" />
-    <ClCompile Include="VoxelGenerator.cpp" />
-    <ClCompile Include="voxel_start.cpp" />
-    <ClCompile Include="WorkOctreeRenderer.cpp" />
+    <ClCompile Include="..\src\BaseOctreeRenderer.cpp" />
+    <ClCompile Include="..\src\DebugRenderer.cpp" />
+    <ClCompile Include="..\src\DepthRenderer.cpp" />
+    <ClCompile Include="..\src\DiffuseOctreeRenderer.cpp" />
+    <ClCompile Include="..\src\intersection.cpp" />
+    <ClCompile Include="..\src\LevelRenderer.cpp" />
+    <ClCompile Include="..\src\morton.cpp" />
+    <ClCompile Include="..\src\NormalRenderer.cpp" />
+    <ClCompile Include="..\src\octree_build.cpp" />
+    <ClCompile Include="..\src\Ray.cpp" />
+    <ClCompile Include="..\src\TopLevelRenderer.cpp" />
+    <ClCompile Include="..\src\TreeTraverser.cpp" />
+    <ClCompile Include="..\src\util.cpp" />
+    <ClCompile Include="..\src\VoxelGenerator.cpp" />
+    <ClCompile Include="..\src\voxel_start.cpp" />
+    <ClCompile Include="..\src\WorkOctreeRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="todo.txt" />
+    <Text Include="..\src\todo.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{62014F3C-605A-485C-B2A9-73728782F783}</ProjectGuid>
@@ -108,27 +108,24 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="custom_includes.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="custom_includes.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="custom_includes.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="custom_includes.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\libs\anttweakbar\include;C:\libs\freeglut\include;C:\libs\trimesh2_new\include;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>C:\libs\anttweakbar\lib;C:\libs\freeglut\lib\x64;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\libs\anttweakbar\include;C:\libs\freeglut\include;C:\libs\trimesh2_new\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\libs\anttweakbar\lib;C:\libs\freeglut\lib\x64;C:\libs\trimesh2\lib.Win64;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

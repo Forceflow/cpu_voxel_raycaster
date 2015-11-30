@@ -1,6 +1,7 @@
 #include <TriMesh.h>
+#include <GL\glew.h>
+
 #include <vector>
-#include <GL/glut.h>
 #include <iostream>
 #include <limits>
 #include <windows.h>
