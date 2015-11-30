@@ -40,6 +40,8 @@ unsigned char* renderdata;
 // OpenGL
 GLuint texid;
 
+GLFWwindow* window;
+
 // Draw fullsize quad, regardless of camera standpoint
 void drawFullsizeQuad()
 {
@@ -79,133 +81,137 @@ void setupTexture(){
 
 void display(void)
 {
+	float ratio;
+	int width, height;
+	glfwGetFramebufferSize(window, &width, &height);
+	ratio = width / (float)height;
+	glViewport(0, 0, width, height);
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	Timer t = Timer();
 	rendername = rmanager.getCurrentRenderer()->name;
 	camera.computeUVW();
 
 	memset(renderdata,0,render_context.n_x*render_context.n_y*4);
 	rmanager.getCurrentRenderer()->Render(render_context,octree, renderdata);
-
 	generateTexture();
 	drawFullsizeQuad();
-	TwDraw();
+
+	//TwDraw();
 	//glPopMatrix();
-	glutSwapBuffers(); // necessary?
+
+	glfwSwapBuffers(window);
 
 	std::stringstream out;
 	out << "Voxelicious v0.2 | Rendertime: " << t.getTimeMilliseconds() << " ms | FPS: " << 1000/t.getTimeMilliseconds();
 	string s = out.str();
-	glutSetWindowTitle(s.c_str());
+	glfwSetWindowTitle(window,s.c_str());
 }
 
-void reshape(int w, int h)
-{
-	// Set our viewport to the size of our window  
-	glViewport(0, 0, (GLsizei)w, (GLsizei)h); 
-	// Switch to the projection matrix so that we can manipulate how our scene is viewed  
-	glMatrixMode(GL_PROJECTION); 
-	// Reset the projection matrix to the identity matrix so that we don't get any artifacts (cleaning up)  
-	glLoadIdentity(); 
-	// Set the Field of view angle (in degrees), the aspect ratio of our window, and the new and far planes 
-	gluPerspective(60, (GLfloat)w / (GLfloat)h, 1.0, 100.0); 
-	// Switch back to the model view matrix, so that we can start drawing shapes correctly 
-	glMatrixMode(GL_MODELVIEW);  
-	TwWindowSize(w, h);
-}
+//void reshape(int w, int h)
+//{
+//	// Set our viewport to the size of our window  
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h); 
+//	// Switch to the projection matrix so that we can manipulate how our scene is viewed  
+//	glMatrixMode(GL_PROJECTION); 
+//	// Reset the projection matrix to the identity matrix so that we don't get any artifacts (cleaning up)  
+//	glLoadIdentity(); 
+//	// Set the Field of view angle (in degrees), the aspect ratio of our window, and the new and far planes 
+//	// gluPerspective(60, (GLfloat)w / (GLfloat)h, 1.0, 100.0); 
+//	// Switch back to the model view matrix, so that we can start drawing shapes correctly 
+//	glMatrixMode(GL_MODELVIEW);  
+//	//TwWindowSize(w, h);
+//}
 
 void loadRenderers(){
 	rmanager = RendererManager();
 	rmanager.addRenderer(new DiffuseOctreeRenderer());
-	rmanager.addRenderer(new BaseOctreeRenderer());
-	rmanager.addRenderer(new WorkOctreeRenderer());
-	rmanager.addRenderer(new NormalRenderer());
-	rmanager.addRenderer(new DepthRenderer());
 	rmanager.addRenderer(new DebugRenderer());
-	rmanager.addRenderer(new LevelRenderer());
-	rmanager.addRenderer(new TopLevelRenderer());
+	//rmanager.addRenderer(new BaseOctreeRenderer());
+	//rmanager.addRenderer(new WorkOctreeRenderer());
+	//rmanager.addRenderer(new NormalRenderer());
+	rmanager.addRenderer(new DepthRenderer());
+	//rmanager.addRenderer(new LevelRenderer());
+	//rmanager.addRenderer(new TopLevelRenderer());
 	rendername = rmanager.getCurrentRenderer()->name;
 }
 
 // Keyboard
-void keyboardfunc(unsigned char key, int x, int y)
+void keyboardfunc(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	TwEventKeyboardGLUT(key,x,y);
+	//TwEventKeyboardGLUT(key,x,y);
 	switch (key) {
-		case '0':
+		case GLFW_KEY_KP_0:
 			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0,-0.1,0);
 			break;
-		case '2':
+		case GLFW_KEY_KP_2:
 			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0,0.1,0);
 			break;
-		case '1':
+		case GLFW_KEY_KP_1:
 			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(-0.1,0,0);
 			break;
-		case '3':
+		case GLFW_KEY_KP_3:
 			render_context.lights[lightselector].position = render_context.lights[lightselector].position + vec3(0.1,0,0);
 			break;
-		case '9':
+		case GLFW_KEY_KP_9:
 			camera.e_ = camera.e_ + vec3(0,0,-0.2);
 			break;
-		case '7':
+		case GLFW_KEY_KP_7:
 			camera.e_ = camera.e_ + vec3(0,0,0.2);
 			break;
-		case '6':
+		case GLFW_KEY_KP_6:
 			camera.e_ = camera.e_ + vec3(0.2,0,0);
 			break;
-		case '4':
+		case GLFW_KEY_KP_4:
 			camera.e_ = camera.e_ + vec3(-0.2,0,0);
 			break;
-		case '8':
+		case GLFW_KEY_KP_8:
 			camera.e_ = camera.e_ + vec3(0,0.2,0);
 			break;
-		case '5':
+		case GLFW_KEY_KP_5:
 			camera.e_ = camera.e_ + vec3(0,-0.2,0);
 			break;
-		case 'w':
+		case GLFW_KEY_W:
 			camera.g_ = camera.g_ + vec3(0.2,0,0);
 			break;
-		case 's':
+		case GLFW_KEY_S:
 			camera.g_ = camera.g_ + vec3(-0.2,0,0);
 			break;
-		case 'a':
+		case GLFW_KEY_A:
 			camera.g_ = camera.g_ + vec3(0,0.2,0);
 			break;
-		case 'd':
+		case GLFW_KEY_D:
 			camera.g_ = camera.g_ + vec3(0,-0.2,0);
 			break;
-		case 'r':
+		case GLFW_KEY_R:
 			camera.g_ = camera.g_ + vec3(0,0,-0.2);
 			break;
-		case 'f':
+		case GLFW_KEY_F:
 			camera.g_ = camera.g_ + vec3(0,0,-0.2);
 			break;
-		case 'n':
+		case GLFW_KEY_N:
 			lightselector = (lightselector+1) % (render_context.lights.size());
 			cout << "light selector:" << lightselector << endl;
 			break;
-		case 'p':
+		case GLFW_KEY_P:
 			rmanager.switchRenderer();
 			break;
-		case 'k':
+		case GLFW_KEY_K:
 			{LevelRenderer* lr = dynamic_cast<LevelRenderer*>(rmanager.getRenderer("level"));
 			lr->maxlevel = (lr->maxlevel -1) % (int) (log2(octree->gridlength)+2);
 			cout << "Max level for Level renderer: " << lr->maxlevel << endl;}
 			break;
-		case 'l':
+		case GLFW_KEY_L:
 			{LevelRenderer* lr = dynamic_cast<LevelRenderer*>(rmanager.getRenderer("level"));
 			lr->maxlevel = (lr->maxlevel + 1) % (int) (log2(octree->gridlength) + 2);
 			cout << "Max level for Level renderer: " << lr->maxlevel << endl;}
 			break;
-		case 'i':
+		case GLFW_KEY_I:
 			{string filename = "image"+getTimeString()+"";
 			writePPM(render_context.n_x,render_context.n_y, renderdata, filename);
 			std::cout << "Image file written: " << filename << ".ppm" << std::endl;}
 			break;
-		default:
-			glutPostRedisplay();
 	}
-	camera.computeUVW();
-	glutPostRedisplay();
 }
 
 void printInfo(){
@@ -291,6 +297,16 @@ void initRenderSystem(unsigned int render_x, unsigned int render_y){
 	render_context.lights.push_back(mylight3);
 }
 
+static void error_callback(int error, const char* description)
+{
+	fputs(description, stderr);
+}
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
+}
+
 int main(int argc, char **argv) {
 	printInfo();
 	printControls();
@@ -307,47 +323,64 @@ int main(int argc, char **argv) {
 	initRenderSystem(render_x,render_y);
 	loadRenderers();
 
-	if(inputformat == OCTREE){
-			readOctree(datafile,octree); // read the octree from cache
-	}
+	if (inputformat == OCTREE) {readOctree(datafile, octree);} // read the octree from cache
 	
 	octree->min = vec3(0,0,2);
 	octree->max = vec3(2,2,0);
 	octree->size = vec3(2,2,2);
 
-	cout << "Starting rendering ..." << endl;
+	//cout << "Starting rendering ..." << endl;
 
 	const int rgba_amount = render_x*render_y*4;
 	renderdata = new unsigned char[rgba_amount]; // put this on heap, it's too big, captain
 
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(render_x, render_y);
-	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Voxel Ray Caster");
-	glutKeyboardFunc(keyboardfunc);
-	glutReshapeFunc(reshape);
-	glutDisplayFunc(display);
-
-	TwInit(TW_OPENGL, NULL);
-	glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
-	glutMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);
-	glutPassiveMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);
-	TwGLUTModifiersFunc(glutGetModifiers);
-	TwBar *bar;
-	bar = TwNewBar("VoxelRaycaster");
-	TwDefine(" GLOBAL help='' "); // Message added to the help bar.
-	TwDefine(" VoxelRaycaster size='200 200' color='150 150 150' iconified=true fontsize=1"); // change default tweak bar size and color
-	TwAddVarRO(bar, "RendererName", TW_TYPE_STDSTRING, &rendername, 
-			   " label='Renderer Name' group=Renderer help='Current renderer' ");
-	TwAddVarRW(bar, "Eye", TW_TYPE_DIR3F, &camera.e_, 
-			   " label='Eye' group=Camera help='Camera eye position' ");
-	TwAddVarRW(bar, "Gaze", TW_TYPE_DIR3F, &camera.g_, 
-			   " label='Gaze' group=Camera help='Camera gaze direction' ");
-	TwAddVarRW(bar, "Top", TW_TYPE_DIR3F, &camera.t_, 
-			   " label='Top' group=Camera help='Camera top direction' ");
-	generateLightTWBars(bar);
+	// Init GLFW system
+	if (!glfwInit()) exit(EXIT_FAILURE);
+	// Init window
+	window = glfwCreateWindow(render_x, render_y, "Voxel Ray Caster", NULL, NULL);
+	if (!window){glfwTerminate();exit(EXIT_FAILURE);}
+	glfwMakeContextCurrent(window);
+	glfwSwapInterval(1);
+	glfwSetKeyCallback(window, keyboardfunc);
 
 	setupTexture();
-	glutMainLoop();
+
+	while (!glfwWindowShouldClose(window))
+	{
+		display();
+		glfwWaitEvents();
+	}
+	glfwDestroyWindow(window);
+	glfwTerminate();
+	exit(EXIT_SUCCESS);
+
+	//glutInit(&argc, argv);
+	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	//glutInitWindowSize(render_x, render_x);
+	//glutInitWindowPosition(100, 100);
+	//glutCreateWindow("Voxel Ray Caster");
+	//glutKeyboardFunc(keyboardfunc);
+	//glutReshapeFunc(reshape);
+	//glutDisplayFunc(display);
+
+	//TwInit(TW_OPENGL, NULL);
+	//glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
+	//glutMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);
+	//glutPassiveMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);
+	//TwGLUTModifiersFunc(glutGetModifiers);
+	//TwBar *bar;
+	//bar = TwNewBar("VoxelRaycaster");
+	//TwDefine(" GLOBAL help='' "); // Message added to the help bar.
+	//TwDefine(" VoxelRaycaster size='200 200' color='150 150 150' iconified=true fontsize=1"); // change default tweak bar size and color
+	//TwAddVarRO(bar, "RendererName", TW_TYPE_STDSTRING, &rendername, 
+	//		   " label='Renderer Name' group=Renderer help='Current renderer' ");
+	//TwAddVarRW(bar, "Eye", TW_TYPE_DIR3F, &camera.e_, 
+	//		   " label='Eye' group=Camera help='Camera eye position' ");
+	//TwAddVarRW(bar, "Gaze", TW_TYPE_DIR3F, &camera.g_, 
+	//		   " label='Gaze' group=Camera help='Camera gaze direction' ");
+	//TwAddVarRW(bar, "Top", TW_TYPE_DIR3F, &camera.t_, 
+	//		   " label='Top' group=Camera help='Camera top direction' ");
+	//generateLightTWBars(bar);
+
+	
 }

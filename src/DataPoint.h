@@ -8,7 +8,7 @@
 #ifndef DATAPOINT_H_
 #define DATAPOINT_H_
 
-#include "array_3d.h"
+//#include "array_3d.h"
 #include "util.h"
 
 using namespace trimesh;
