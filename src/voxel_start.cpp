@@ -363,6 +363,9 @@ int main(int argc, char **argv) {
 	//glutReshapeFunc(reshape);
 	//glutDisplayFunc(display);
 
+
+	// TODO: reintroduce this
+
 	//TwInit(TW_OPENGL, NULL);
 	//glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
 	//glutMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);
