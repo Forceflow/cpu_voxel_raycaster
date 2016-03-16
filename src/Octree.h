@@ -26,7 +26,7 @@ public:
 	// The octree nodes
 	std::vector<Node> nodes;
 
-	Octree(vec3 min, vec3 max, vec3 size, size_t gridlength);
+	Octree(vec3 min, vec3 max, size_t gridlength);
 	Octree();
 	size_t storeNode(Node n);
 	const Node* getNode(size_t index) const;
@@ -36,8 +36,8 @@ public:
 	~Octree(void);
 };
 
-inline Octree::Octree(vec3 min, vec3 max, vec3 size, size_t gridlength)
-	: min(min), max(max), size(size), gridlength(gridlength){
+inline Octree::Octree(vec3 min, vec3 max, size_t gridlength)
+	: min(min), max(max), size(min + max), gridlength(gridlength){
 		nodes.push_back(Node()); // push back NULL node
 }
 
