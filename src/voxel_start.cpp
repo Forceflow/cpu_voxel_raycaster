@@ -1,11 +1,10 @@
-#include <TriMesh.h>
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
+#include <TriMesh.h>
 
 #include <vector>
 #include <iostream>
 #include <limits>
-#include <windows.h>
 
 #include "RenderContext.h" 
 #include "util.h"
@@ -19,7 +18,6 @@
 #include "TopLevelRenderer.h"
 #include "RendererManager.h"
 #include "octree_build.h"
-#include <AntTweakBar.h>
 
 using namespace std;
 
@@ -261,27 +259,27 @@ void parseParameters(int argc, char **argv, string& file, FileFormat &inputforma
 	}
 }
 
-void generateLightTWBars(TwBar* bar){
-	TwStructMember lightMembers[] = // array used to describe tweakable variables of the Light structure
-	{
-		{ "Active",    TW_TYPE_BOOL32, offsetof(Light, active),"" },
-		{ "Position",    TW_TYPE_DIR3F, offsetof(Light, position),"" },  
-		{ "Diffuse",     TW_TYPE_COLOR3F, offsetof(Light, diffuse),"" },       
-		{ "Specular",    TW_TYPE_COLOR3F,   offsetof(Light, specular),"" },
-		{ "Constant Attenuation", TW_TYPE_FLOAT, offsetof(Light, CONSTANT_ATTENUATION), "" },
-		{ "Linear Attenuation", TW_TYPE_FLOAT, offsetof(Light, LINEAR_ATTENUATION), "" },
-		{ "Quadratic Attenuation", TW_TYPE_FLOAT, offsetof(Light, QUADRATIC_ATTENUATION), "" },
-		{ "Shininess", TW_TYPE_FLOAT, offsetof(Light, SHININESS), "" }
-	};
-	TwType lightType = TwDefineStruct("Light", lightMembers, 7, sizeof(Light), NULL, NULL);
-
-	for(int i = 0; i<render_context.lights.size(); i++){
-		std::stringstream name;
-		name << "Light " << i+1;
-		TwAddVarRW(bar, name.str().c_str(), lightType, &render_context.lights[i], "group='Lights'"); // Add a lightType variable and group it into the 'Edit lights' group
-		TwSetParam(bar, name.str().c_str(), "label", TW_PARAM_CSTRING, 1, name.str().c_str()); // Set label
-	}
-}
+//void generateLightTWBars(TwBar* bar){
+//	TwStructMember lightMembers[] = // array used to describe tweakable variables of the Light structure
+//	{
+//		{ "Active",    TW_TYPE_BOOL32, offsetof(Light, active),"" },
+//		{ "Position",    TW_TYPE_DIR3F, offsetof(Light, position),"" },  
+//		{ "Diffuse",     TW_TYPE_COLOR3F, offsetof(Light, diffuse),"" },       
+//		{ "Specular",    TW_TYPE_COLOR3F,   offsetof(Light, specular),"" },
+//		{ "Constant Attenuation", TW_TYPE_FLOAT, offsetof(Light, CONSTANT_ATTENUATION), "" },
+//		{ "Linear Attenuation", TW_TYPE_FLOAT, offsetof(Light, LINEAR_ATTENUATION), "" },
+//		{ "Quadratic Attenuation", TW_TYPE_FLOAT, offsetof(Light, QUADRATIC_ATTENUATION), "" },
+//		{ "Shininess", TW_TYPE_FLOAT, offsetof(Light, SHININESS), "" }
+//	};
+//	TwType lightType = TwDefineStruct("Light", lightMembers, 7, sizeof(Light), NULL, NULL);
+//
+//	for(int i = 0; i<render_context.lights.size(); i++){
+//		std::stringstream name;
+//		name << "Light " << i+1;
+//		TwAddVarRW(bar, name.str().c_str(), lightType, &render_context.lights[i], "group='Lights'"); // Add a lightType variable and group it into the 'Edit lights' group
+//		TwSetParam(bar, name.str().c_str(), "label", TW_PARAM_CSTRING, 1, name.str().c_str()); // Set label
+//	}
+//}
 
 void initRenderSystem(unsigned int render_x, unsigned int render_y){
 	camera = Camera(vec3(0,0,0),vec3(vec3(0,0,-1)),vec3(0,1,0));
