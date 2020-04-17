@@ -13,4 +13,10 @@ I'm trying to get the project in a workable state state again. Here are some bui
  * Requires **trimesh2**: My ready-made fork can be found [here](https://github.com/Forceflow/trimesh2))
  * Requires **[GLFW](https://www.glfw.org/)**: Only very basic window creation / keyboard functionality / OpenGL context setup is used, so it _should_ be fine to use any recent version of GLFW.
  * Requires **[glew](http://glew.sourceforge.net/)**: Again, only using this to grab OpenGL extensions. Any recent version should do.
+ 
+ # Controls
+ Behold my horrible control scheme
+ * Numpad 4-6: Camera left right, 8-5 up down, 7-9 forwards backwards
+ * i : save screenshot in PPM format
+ * p : toggle between renderers (Included are: Diffuse, Depthmap, Intersection Test counts, Normal Map, Octree levels)
 
