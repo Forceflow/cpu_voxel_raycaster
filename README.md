@@ -5,7 +5,7 @@ This is the basic raycaster I used to generate visualizations for my Out-Of-Core
 
 The code was never published as part of the publication. People have been mailing me over the years for a tool to visualize the output of ooc_svo_builder, so here it is. Note that this code is +5 yrs old and has been unmaintained since, so it will require some work to get started, but can help you if you want to research the topic further.
 
-![vizualization_example](https://raw.githubusercontent.com/Forceflow/cpu_voxel_raycaster/master/img/dragon_render.png)
+![vizualization_example](https://raw.githubusercontent.com/Forceflow/cpu_voxel_raycaster/master/img/viz_example.png)
 
 # Building & Requirements
 I'm trying to get the project in a workable state state again. Here are some build notes for other adventurers:
