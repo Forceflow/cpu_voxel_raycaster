@@ -33,14 +33,14 @@ void DiffuseOctreeRenderer::Render(const RenderContext& rc, const Octree const* 
 						if(rc.lights[i].active){
 							to_light = rc.lights[i].position - t.getCurrentPosition();
 							vec3 s = to_light + (rc.camera->e_ - t.getCurrentPosition());
-							s = normalize(s);
+							s = normalized(s);
 
 							distancecut = 1.0f /(
 								rc.lights[i].CONSTANT_ATTENUATION +
 								rc.lights[i].LINEAR_ATTENUATION*len(to_light) +
 								rc.lights[i].QUADRATIC_ATTENUATION*len2(to_light));
 
-							to_light = normalize(to_light);
+							to_light = normalized(to_light);
 
 							// Diffuse
 							diffuse_factor = tree->data[t.getCurrentNode()->data].normal DOT to_light;

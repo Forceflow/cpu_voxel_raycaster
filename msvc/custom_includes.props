@@ -3,9 +3,9 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <BINARY_OUTPUT_DIR>E:\jeroenb\Binaries\</BINARY_OUTPUT_DIR>
-    <TRIMESH_DIR>C:\libs\trimesh2\</TRIMESH_DIR>
-    <GLFW_DIR>C:\libs\glfw\</GLFW_DIR>
-    <GLEW_DIR>C:\libs\glew\</GLEW_DIR>
+    <TRIMESH_DIR>D:\dev\libs\trimesh2\</TRIMESH_DIR>
+    <GLFW_DIR>D:\dev\libs\glfw\</GLFW_DIR>
+    <GLEW_DIR>D:\dev\libs\glew\</GLEW_DIR>
   </PropertyGroup>
   <PropertyGroup>
     <IncludePath>$(TRIMESH_DIR)\include\;$(GLFW_DIR)\include\;$(GLEW_DIR)\include\;$(IncludePath)</IncludePath>

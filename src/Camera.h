@@ -27,8 +27,8 @@ struct Camera {
 	}
 
 	void computeUVW(){
-		vec3 w = normalize(g_) * -1.0f;
-		vec3 u = normalize((vec3)(t_ CROSS w));
+		vec3 w = normalized(g_) * -1.0f;
+		vec3 u = normalized((vec3)(t_ CROSS w));
 		vec3 v = (w CROSS u);
 		w_ = w; u_ = u; v_ = v;
 	}
